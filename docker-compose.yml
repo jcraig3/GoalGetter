@@ -1,0 +1,201 @@
+# GoalGetter — shared service definitions.
+#
+# This file alone is not runnable. It is always combined with an overlay that
+# supplies how each service gets its code:
+#
+#   docker-compose.dev.yml   base images + mounted source  (no builds)
+#   docker-compose.prod.yml  built images, code baked in
+#
+# .env selects which, via COMPOSE_FILE, so the command is identical everywhere:
+#
+#   docker compose up -d
+
+name: goalgetter
+
+# Caps container logs so they cannot fill the disk. Docker's json-file driver
+# is unbounded by default — a chatty container will consume a whole volume and
+# take the host with it.
+x-logging: &default-logging
+  driver: json-file
+  options:
+    max-size: '10m'
+    max-file: '5'
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    logging: *default-logging
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      # Mounted at /var/lib/postgresql, NOT .../data. Postgres 18 stores data
+      # in a major-version subdirectory (18/docker) so a future
+      # `pg_upgrade --link` stays inside one mount point; the old .../data path
+      # makes the container refuse to start.
+      - ./volumes/postgres:/var/lib/postgresql
+      # *.sql and *.sh here run once, on first boot of an empty database.
+      - ./postgres:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      # Doubled $$ so the container's shell expands these, not Compose.
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  api:
+    restart: unless-stopped
+    logging: *default-logging
+    depends_on:
+      postgres:
+        # Waits for Postgres to accept connections, not merely to have started.
+        condition: service_healthy
+    env_file: .env
+    environment:
+      # Container-internal, so not in .env — that file describes the
+      # deployment; these describe the network between containers.
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    volumes:
+      # **Hosting set up in the app** (Phase 20). The server's .env, so the
+      # app and the file stay in step — the API writes only its hosting
+      # lines, never anything else. Mounted as the file itself, so it is
+      # written in place.
+      - ./.env:/run/goalgetter/.env
+      # Certificate files uploaded in Settings, which Caddy reads.
+      - ./volumes/certs:/hosting/certs
+      # Caddy's admin socket: how the API reconfigures it while it runs.
+      - caddy-admin:/run/caddy-admin
+      # The HTTPS address nginx's plain port needs, which nginx watches.
+      - nginx-gg:/run/goalgetter-nginx
+      # The Cloudflare tunnel's token, handed to the `tunnel` service.
+      - tunnel:/run/goalgetter-tunnel
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://localhost:8000/api/health')
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+
+  web:
+    restart: unless-stopped
+    logging: *default-logging
+    ports:
+      # The only published port. The API and database stay on the internal
+      # network, reachable only by other containers. (nginx's :81 is Caddy's
+      # alone, and is never published.)
+      - '${APP_PORT:-8080}:80'
+    environment:
+      # Read by docker/web-https.sh: with HTTPS on, the plain port serves TVs
+      # only and sends everything else to the HTTPS address (P5-3).
+      COMPOSE_PROFILES: ${COMPOSE_PROFILES:-}
+      HTTPS_HOST: ${HTTPS_HOST:-}
+      HTTPS_PORT: ${HTTPS_PORT:-443}
+      HTTPS_FRONT_DOOR: ${HTTPS_FRONT_DOOR:-}
+    volumes:
+      # Written by the API when HTTPS changes; reloaded by docker/web-https.sh.
+      - nginx-gg:/etc/nginx/gg
+    healthcheck:
+      # 127.0.0.1, not localhost. Inside the container `localhost` resolves to
+      # ::1 first, and `listen 80` binds IPv4 only — so the check gets
+      # "connection refused" and reports a perfectly healthy container as
+      # unhealthy, which an orchestrator would act on by killing it.
+      # /healthz, not /: with HTTPS on, the plain port redirects "/".
+      test: ['CMD', 'wget', '-qO-', 'http://127.0.0.1/healthz']
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    # No depends_on: api. nginx resolves the upstream at request time via
+    # Docker DNS, so it starts fine without the API and simply 502s until the
+    # API answers. See nginx/conf.d/default.conf.
+
+  # HTTPS in front of `web`. **Always running, configured from the app**
+  # (Phase 20): Settings → Hosting turns HTTPS on, picks the certificate, and
+  # the API loads Caddy's configuration through its admin socket while it
+  # runs. With HTTPS off it serves nothing. `web` keeps serving plain HTTP on
+  # APP_PORT for TVs. documentation/20-hosting.md.
+  #
+  # Ports 443 and 80 are reserved for it. If this server already uses them
+  # (IIS, say), set HTTPS_PORT and HTTP_PORT in .env once.
+  https:
+    build:
+      context: .
+      dockerfile: docker/caddy.Dockerfile
+    restart: unless-stopped
+    logging: *default-logging
+    # --resume: after a restart, carry on with the last configuration the app
+    # gave it, not the empty starting file.
+    command: caddy run --resume --config /etc/caddy/Caddyfile --adapter caddyfile
+    ports:
+      - '${HTTPS_PORT:-443}:443'
+      # The redirect to https, and the root certificate for `internal` mode.
+      - '${HTTP_PORT:-80}:80'
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile:ro
+      # The admin socket, shared with the API only.
+      - caddy-admin:/run/caddy-admin
+      # Certificates, keys and the local authority. Kept on the host so a
+      # rebuilt container keeps the same root — otherwise every device would
+      # have to trust a new one.
+      - ./volumes/caddy/data:/data
+      - ./volumes/caddy/config:/config
+      # For HTTPS_CERTIFICATE=files: cert.pem and key.pem.
+      - ./volumes/certs:/certs:ro
+
+  # Cloudflare in front, through a tunnel. **Always running, idle until the
+  # app turns a tunnel on** (Phase 21): Settings → Hosting saves the token,
+  # the API hands it over through a volume only the two share, and
+  # docker/tunnel.sh starts cloudflared — an outbound connection to
+  # Cloudflare, so no port on this server is opened to anybody. Cloudflare
+  # holds the certificate. In its dashboard the tunnel's public hostname
+  # points at http://web:81 — nginx's listener for a front door, which takes
+  # the visitor's address from X-Forwarded-For as Cloudflare wrote it.
+  # documentation/hosting/cloudflare-tunnel.md
+  tunnel:
+    build:
+      context: .
+      dockerfile: docker/tunnel.Dockerfile
+    restart: unless-stopped
+    logging: *default-logging
+    volumes:
+      - tunnel:/run/goalgetter-tunnel
+
+  # Nightly dump, keeping the last 14, into ./volumes/backups on the host so
+  # they can be copied off-box — which is the operator's job, not this
+  # container's. A backup on the same disk as the database is not a backup.
+  db-backup:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    logging: *default-logging
+    depends_on:
+      postgres:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      POSTGRES_HOST: postgres
+    volumes:
+      - ./volumes/backups:/backups
+      - ./docker/db-backup.sh:/usr/local/bin/db-backup.sh:ro
+    # Real cron, not a sleep loop: `sleep 86400` restarts its clock on every
+    # deploy, so a stack redeployed each afternoon would never reach 3am.
+    command: >
+      sh -c "echo '0 3 * * * /usr/local/bin/db-backup.sh' > /etc/crontabs/root
+      && crond -f -l 8"
+
+volumes:
+  # Caddy's admin socket, shared by Caddy and the API only (Phase 20). A
+  # Docker volume, not a folder on the host: a socket cannot live on a Windows
+  # folder shared into Docker.
+  caddy-admin:
+  # The HTTPS address nginx's plain port needs, written by the API.
+  nginx-gg:
+  # The tunnel's token and cloudflared's log, shared by the API and `tunnel`.
+  tunnel:

@@ -1,0 +1,7 @@
+# HTTPS_CERTIFICATE=internal — the default.
+#
+# Caddy runs its own certificate authority and issues and renews the
+# certificate itself. Free, works with no internet and no domain. Each device
+# trusts the authority once: download http://<HTTPS_HOST>/goalgetter-root.crt,
+# or push it to every company PC through Group Policy or Intune.
+tls internal

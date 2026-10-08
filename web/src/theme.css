@@ -1,0 +1,465 @@
+@import 'tailwindcss';
+
+/* GoalGetter design tokens.
+ *
+ * Dark is the default, defined on bare :root so it needs no media query.
+ * Light is an explicit opt-in via data-theme="light" and ships in Phase 2.
+ *
+ * Rule: components never contain a hex value. Everything goes through a token.
+ */
+
+:root {
+  /* Surfaces. On a dark background a drop shadow is invisible, so elevation
+     is expressed as lightness — raised surfaces are lighter. */
+  --gg-bg: #0b0e14;
+  --gg-surface: #141821;
+  --gg-surface-raised: #1c212d;
+  /* Lighter than raised, so a row lights up on hover whether it sits on a
+     card or inside a modal. */
+  --gg-surface-hover: #222836;
+  --gg-border: #262c3a;
+
+  /* Not pure white. #fff on near-black causes halation — the text appears to
+     glow and bleed, which is tiring over a full workday. */
+  --gg-text: #e8ebf0;
+  --gg-text-muted: #98a2b3;
+  /* Hints and captions. A touch lighter than 12-design-system.md's #6B7484,
+     which is 3.8:1 on a card — under AA for the 12px text it is used for.
+     This is 4.7:1 on a raised surface. */
+  --gg-text-subtle: #828b9d;
+
+  --gg-brand: #6366f1;
+  --gg-brand-hover: #818cf8;
+  /* A tinted surface, not a pale wash: the current nav item, a chosen tile. */
+  --gg-brand-subtle: #1e2140;
+
+  /* Tuned for dark surfaces. These are NOT the same values light mode uses:
+     #16a34a green reads well on white and muddy on near-black. */
+  --gg-success: #34d399;
+  --gg-warning: #fbbf24;
+  --gg-danger: #f87171;
+
+  /* Podium colours. Real metals rather than the theme's palette: a gold that
+     is really amber reads as a warning, and a leaderboard's top three is the
+     one place in this product where a literal colour carries meaning. */
+  --gg-gold: #fbbf24;
+  --gg-silver: #cbd5e1;
+  --gg-bronze: #d19a66;
+
+  /* Overwritten by `applyAppearance` with whatever the organization chose.
+     Declared here so a page that never applies one still has every token. */
+  --gg-accent: #34d399;
+  --gg-wall-font: var(--font-sans);
+  --gg-font-scale: 1;
+  --gg-panel-opacity: 0.72;
+  --gg-panel-blur: 12px;
+  --gg-panel-radius: 16px;
+}
+
+:root[data-theme='light'] {
+  --gg-bg: #fafafa;
+  --gg-surface: #ffffff;
+  --gg-surface-raised: #ffffff;
+  --gg-surface-hover: #f4f4f5;
+  --gg-border: #e4e4e7;
+
+  --gg-text: #18181b;
+  --gg-text-muted: #52525b;
+  --gg-text-subtle: #71717a;
+
+  --gg-brand: #4f46e5;
+  --gg-brand-hover: #4338ca;
+  --gg-brand-subtle: #eef2ff;
+
+  --gg-success: #15803d;
+  --gg-warning: #b45309;
+  --gg-danger: #b91c1c;
+
+  /* Darkened for white surfaces — the dark-mode gold is invisible on white. */
+  --gg-gold: #b45309;
+  --gg-silver: #64748b;
+  --gg-bronze: #92400e;
+}
+
+/* **"Follow my system" now follows the system.**
+ *
+ * `applyTheme('system')` removes the attribute and leaves it to CSS, and the
+ * comment where it does so said the media query stays in charge — but there
+ * was no media query, so every person who chose "system" got dark whatever
+ * their laptop said. The palette is repeated rather than shared because the
+ * two selectors cannot be combined: one is an attribute and the other is a
+ * media condition. Any change here belongs in both.
+ *
+ * `:not([data-theme='dark'])` is what keeps an explicit choice winning over
+ * the operating system's. */
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    --gg-bg: #fafafa;
+    --gg-surface: #ffffff;
+    --gg-surface-raised: #ffffff;
+    --gg-surface-hover: #f4f4f5;
+    --gg-border: #e4e4e7;
+
+    --gg-text: #18181b;
+    --gg-text-muted: #52525b;
+    --gg-text-subtle: #71717a;
+
+    --gg-brand: #4f46e5;
+    --gg-brand-hover: #4338ca;
+    --gg-brand-subtle: #eef2ff;
+
+    --gg-success: #15803d;
+    --gg-warning: #b45309;
+    --gg-danger: #b91c1c;
+
+    --gg-gold: #b45309;
+    --gg-silver: #64748b;
+    --gg-bronze: #92400e;
+  }
+}
+
+/* Maps tokens to Tailwind class names. `bg-surface` resolves to
+   var(--gg-surface), so switching data-theme re-themes the whole app without
+   a single class name changing and without any dark: variants. */
+@theme inline {
+  --color-bg: var(--gg-bg);
+  --color-surface: var(--gg-surface);
+  --color-surface-raised: var(--gg-surface-raised);
+  /* **These three were used in ~400 places and defined nowhere**, the same
+   * way the type scale below was: every hint and caption rendered at full
+   * text colour, no row or button lit up on hover, and the current nav item
+   * had no tint. */
+  --color-surface-hover: var(--gg-surface-hover);
+  --color-edge: var(--gg-border);
+
+  --color-content: var(--gg-text);
+  --color-content-muted: var(--gg-text-muted);
+  --color-content-subtle: var(--gg-text-subtle);
+
+  --color-brand: var(--gg-brand);
+  --color-brand-hover: var(--gg-brand-hover);
+  --color-brand-subtle: var(--gg-brand-subtle);
+
+  --color-success: var(--gg-success);
+  --color-warning: var(--gg-warning);
+  --color-danger: var(--gg-danger);
+
+  --color-gold: var(--gg-gold);
+  --color-silver: var(--gg-silver);
+  --color-bronze: var(--gg-bronze);
+
+  /* The organization's third colour. Set by `applyAppearance` and mapped here
+     so `text-accent` and `bg-accent` are real — it was a CSS variable nothing
+     read for a while, which is the same as not having the setting. */
+  --color-accent: var(--gg-accent);
+
+  /* The app's own type scale, as 12-design-system.md specifies it.
+   *
+   * **Used in 76 places and defined nowhere until now**, so `text-h1` and the
+   * rest generated no CSS at all: every page title, card title and caption
+   * was body text, and no page had a visible heading. */
+  --text-h1: 1.5rem;
+  --text-h1--line-height: 2rem;
+  --text-h1--font-weight: 600;
+  --text-h2: 1.25rem;
+  --text-h2--line-height: 1.75rem;
+  --text-h2--font-weight: 600;
+  --text-h3: 1rem;
+  --text-h3--line-height: 1.5rem;
+  --text-h3--font-weight: 600;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+  --text-caption--font-weight: 500;
+
+  /* Wall type, in `em` rather than `rem`.
+   *
+   * This is what makes "font scale" a real control. Tailwind's own text sizes
+   * are rem, which is relative to the document root — so a scale applied to the
+   * wall element would change nothing, and applying it to the root would
+   * resize the whole app around the preview. In em, every one of these is
+   * relative to `.wall`, and one number there moves all of them.
+   *
+   * The values are Tailwind's own, so `text-wall-4xl` is `text-4xl` at scale 1
+   * and nothing about the design changes by adopting them. */
+  --text-wall-base: 1em;
+  --text-wall-base--line-height: 1.5;
+  --text-wall-lg: 1.125em;
+  --text-wall-lg--line-height: 1.55;
+  --text-wall-xl: 1.25em;
+  --text-wall-xl--line-height: 1.4;
+  --text-wall-2xl: 1.5em;
+  --text-wall-2xl--line-height: 1.33;
+  --text-wall-3xl: 1.875em;
+  --text-wall-3xl--line-height: 1.2;
+  --text-wall-4xl: 2.25em;
+  --text-wall-4xl--line-height: 1.11;
+  --text-wall-5xl: 3em;
+  --text-wall-5xl--line-height: 1;
+  --text-wall-6xl: 3.75em;
+  --text-wall-6xl--line-height: 1;
+  --text-wall-7xl: 4.5em;
+  --text-wall-7xl--line-height: 1;
+  --text-wall-8xl: 6em;
+  --text-wall-8xl--line-height: 1;
+
+  --font-sans:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue',
+    Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    /* Renders native scrollbars and form controls in dark. Without it you get
+       light scrollbars against a near-black page. */
+    color-scheme: dark;
+  }
+
+  :root[data-theme='light'] {
+    color-scheme: light;
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme='dark']) {
+      color-scheme: light;
+    }
+  }
+
+  body {
+    background-color: var(--gg-bg);
+    color: var(--gg-text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* The wall.
+   *
+   * A scope rather than a page, because the preview is a wall inside the app
+   * and has to honour the same settings — a preview that ignored the font or
+   * the panel style would be a preview of something the television does not
+   * show, which is the failure the shared renderer exists to prevent. */
+  .wall {
+    /* **A wall is always a dark room with a projector.** It has no person
+       behind it to have a preference, and a television that turned white
+       because the machine driving it prefers light would be a very bright
+       surprise in an office at night. */
+    color-scheme: dark;
+    font-family: var(--gg-wall-font);
+    /* The base every `text-wall-*` size multiplies. */
+    font-size: calc(1rem * var(--gg-font-scale));
+  }
+
+  /* A card on a wall.
+   *
+   * Three settings that only mean anything together: a panel over a photograph
+   * needs to be see-through enough to show it and opaque enough to read. They
+   * were stored and editable for a while with nothing reading them. */
+  .wall-panel {
+    background-color: color-mix(
+      in srgb,
+      var(--gg-surface) calc(var(--gg-panel-opacity) * 100%),
+      transparent
+    );
+    backdrop-filter: blur(var(--gg-panel-blur));
+    border-radius: var(--gg-panel-radius);
+  }
+
+  /* Every number in the app uses tabular figures. Without this, digits have
+     different widths and leaderboard columns visibly jitter on refresh. */
+  .gg-numeric,
+  td,
+  th {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* The celebration overlay's entrance. Defined here rather than inline
+     because the reduced-motion rule below has to be able to reach it — a
+     keyframe declared in a component would animate regardless. */
+  @keyframes celebrate {
+    from {
+      opacity: 0;
+      transform: scale(0.92) translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/*
+ * A moving gradient background's drift. Transform only, so it is composited
+ * rather than repainted — see WallBackground. The layer is twice the screen
+ * in each direction, so a quarter of that is as far as it can travel without
+ * showing an edge.
+ */
+@keyframes gg-drift {
+  from { transform: translate(-12%, -8%) rotate(0deg); }
+  to   { transform: translate(12%, 8%) rotate(8deg); }
+}
+
+/*
+ * A race layout's finish line: a chequered flag in the wall's own text and
+ * background colours, so it reads as a flag on a light theme and a dark one
+ * without being an image.
+ */
+.chequered {
+  background: repeating-conic-gradient(var(--gg-text) 0 25%, var(--gg-bg) 0 50%) 0 0 / 0.45em 0.45em;
+}
+
+/*
+ * The prize wheel on the wall: several turns, easing to a stop. Fixed length,
+ * so every screen that started together lands together — see WheelLanding.
+ */
+@keyframes gg-wheel-land {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(1845deg); }
+}
+
+/* What the wheel landed on, arriving once it has. */
+@keyframes gg-reveal {
+  from { opacity: 0; transform: translateY(0.5em); }
+  to   { opacity: 1; transform: none; }
+}
+
+/*
+ * A celebration's trophy (6.6): up from below with a bounce, a slow float,
+ * a glow that breathes, light that sweeps across once, and confetti thrown
+ * out and falling. Each is timed from when the celebration began — see
+ * CelebrationArt — so screens joining part-way are in step.
+ */
+@keyframes gg-trophy-in {
+  0%   { opacity: 0; transform: translateY(160px) scale(0.4); }
+  55%  { opacity: 1; transform: translateY(-18px) scale(1.07); }
+  78%  { transform: translateY(5px) scale(0.98); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes gg-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+@keyframes gg-glow {
+  0%, 100% { opacity: 0.55; transform: scale(1); }
+  50%      { opacity: 0.95; transform: scale(1.1); }
+}
+@keyframes gg-shine {
+  0%   { opacity: 0; transform: translateX(-120%) skewX(-20deg); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(320%) skewX(-20deg); }
+}
+@keyframes gg-confetti {
+  0%   { opacity: 1; transform: translate(0, 0) rotate(0deg); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--dx), var(--dy)) rotate(var(--rot)); }
+}
+@keyframes gg-rise-in {
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/*
+ * Drawn scene backgrounds (6.9). Transform and opacity only, so a television
+ * moves layers rather than repainting — see wall/Scenes.tsx.
+ */
+@keyframes gg-slide-x {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes gg-slide-y {
+  from { transform: translateY(0); }
+  to   { transform: translateY(33.333%); }
+}
+@keyframes gg-blob {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(8%, -6%) scale(1.12); }
+  100% { transform: translate(-6%, 8%) scale(0.95); }
+}
+/* A full-height column carrying a light or a piece of confetti: percentages
+   of its own height, which is the scene's. */
+@keyframes gg-rise {
+  from { transform: translateY(105%); }
+  to   { transform: translateY(-20%); }
+}
+@keyframes gg-fall {
+  from { transform: translateY(-5%); }
+  to   { transform: translateY(105%); }
+}
+@keyframes gg-twinkle {
+  0%, 100% { opacity: 0.85; }
+  50%      { opacity: 0.15; }
+}
+
+/* **A modal's actions stay on screen on a phone** (5i), where every modal is
+ * a full-screen sheet. Found rather than marked: nearly every form in a modal
+ * ends in its row of buttons, and `:has()` keeps a form that ends in
+ * something else — a hint, a list — from pinning it. The negative margins
+ * undo the sheet body's padding, so the bar runs edge to edge. */
+@media (width < 40rem) {
+  .gg-sheet-body form > :last-child:has(button[type='submit']) {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    margin-inline: -1rem;
+    margin-bottom: -1.25rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--gg-border);
+    background: var(--gg-surface);
+  }
+}
+
+/* **A table is a stack of cards on a phone** (5i). Users, Metrics and
+ * Corrections scrolled sideways, with the column that mattered off screen.
+ * Each row becomes a card: the cell marked `data-primary` (the name) across
+ * the top whatever its column, each `data-label` cell in two columns under its
+ * label, and the `data-actions` cell in the next free slot, at the right. */
+@media (width < 40rem) {
+  table.gg-stack,
+  .gg-stack tbody {
+    display: block;
+  }
+  .gg-stack thead {
+    display: none;
+  }
+  .gg-stack tr {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 0.5rem 1rem;
+    padding: 0.875rem 1rem;
+  }
+  .gg-stack td {
+    min-width: 0;
+    padding: 0;
+    text-align: left;
+  }
+  .gg-stack td[data-primary] {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+  .gg-stack td[data-actions] {
+    grid-column: 2;
+    justify-self: end;
+    align-self: end;
+  }
+  .gg-stack td[data-label]::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: var(--gg-text-subtle);
+  }
+}
+
+/* The row the command palette sent somebody to (7.9), picked out for a moment. */
+.gg-focus-row {
+  outline: 2px solid var(--gg-brand);
+  outline-offset: 2px;
+  scroll-margin: 6rem;
+}

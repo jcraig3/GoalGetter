@@ -1,0 +1,25 @@
+# The HTTPS front door outside Docker (Phase 17) — added to COMPOSE_FILE by
+# windows/install-front-door.ps1, never by hand.
+#
+# Docker Desktop hides every device's address: it runs the containers inside
+# a hidden Linux machine and copies each connection in. A front door running
+# on Windows itself sees the device first, and passes its address on in
+# X-Forwarded-For, which survives the copy. So Docker's ports move to this
+# computer only, and the front door is the one thing the network can reach:
+#
+#   front door  https  :443  ──▶  127.0.0.1:8091  ──▶  nginx :81  (the HTTPS path)
+#   front door  plain  :8080 ──▶  127.0.0.1:8090  ──▶  nginx :80  (TVs only)
+#
+# Bound to 127.0.0.1 so nothing on the network can reach nginx directly and
+# pretend to be the front door.
+
+services:
+  web:
+    ports: !override
+      - '127.0.0.1:${FRONT_DOOR_PLAIN_PORT:-8090}:80'
+      - '127.0.0.1:${FRONT_DOOR_HTTPS_PORT:-8091}:81'
+  # The Windows front door takes 443 and 80, so Caddy in Docker gives them up.
+  # It keeps running (the app talks to it) and serves nothing: the app sees
+  # the front door and sends it an empty configuration.
+  https:
+    ports: !reset []

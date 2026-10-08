@@ -1,0 +1,23 @@
+# GoalGetter — HTTPS in front of the app.
+#
+# **The app configures this (Phase 20).** Settings → Hosting saves how HTTPS
+# should work, and the API loads Caddy's whole configuration through Caddy's
+# admin interface — a socket shared with the API only — while Caddy runs.
+# Nothing to edit here, and no restart.
+#
+# This file is only the starting point: the admin socket, and no sites. Caddy
+# runs with --resume (docker-compose.yml), so after a restart it carries on
+# with the last configuration the app gave it rather than starting from here,
+# and the app checks and re-sends it within half a minute either way.
+#
+# The configuration the app sends is built in api/app/hosting_config.py.
+
+{
+	admin unix//run/caddy-admin/admin.sock|0666
+	skip_install_trust
+	pki {
+		ca local {
+			name "GoalGetter Local Authority"
+		}
+	}
+}

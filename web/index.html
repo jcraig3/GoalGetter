@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="theme-color" content="#0b0e14" />
+    <!-- The Goals target until the organization's logo is known: siteIcon.ts. -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>GoalGetter</title>
+    <!-- Inline so the dark background paints before the stylesheet loads.
+         Otherwise every page load starts with a white flash. -->
+    <style>
+      html,
+      body,
+      #root {
+        min-height: 100%;
+        margin: 0;
+        background: #0b0e14;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

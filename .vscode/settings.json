@@ -1,0 +1,32 @@
+{
+  // Postgres rewrites ~1,300 files under volumes/postgres continuously. Left
+  // alone, VS Code watches all of them — constant CPU, noisy search results,
+  // and stale git decorations on files that are already gitignored.
+  "files.watcherExclude": {
+    "**/volumes/**": true,
+    "**/node_modules/**": true,
+    "**/__pycache__/**": true
+  },
+
+  "search.exclude": {
+    "**/volumes/**": true,
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/__pycache__/**": true
+  },
+
+  // Hides the database internals only. volumes/backups stays visible — those
+  // are files someone may genuinely want to open or copy off the machine.
+  "files.exclude": {
+    "**/volumes/postgres": true,
+    "**/__pycache__": true
+  },
+
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+
+  // Shell scripts must stay LF or their shebang fails inside a Linux
+  // container. .gitattributes enforces this in git; this stops the editor
+  // writing CRLF in the first place.
+  "[shellscript]": { "files.eol": "\n" }
+}

@@ -1,0 +1,17 @@
+# HTTPS_CERTIFICATE=letsencrypt — a free certificate every device already trusts.
+#
+# For a name in a domain you control (goalgetter.acme.com) or a free DuckDNS
+# name (acme-goals.duckdns.org). Proven with a DNS record rather than a web
+# request, so the server never has to be reachable from the internet:
+#
+#   DNS_PROVIDER    cloudflare | duckdns
+#   DNS_API_TOKEN   an API token that may edit that zone's records
+#   ACME_EMAIL      where Let's Encrypt sends expiry warnings (optional)
+#
+# Public resolvers for the propagation check: an office DNS server often
+# answers for the company's own domain itself and never shows the TXT record
+# Let's Encrypt is looking for.
+tls {$ACME_EMAIL} {
+	dns {$DNS_PROVIDER} {$DNS_API_TOKEN}
+	resolvers 1.1.1.1 8.8.8.8
+}

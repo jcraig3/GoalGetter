@@ -1,0 +1,12 @@
+# HTTPS_CERTIFICATE=files — a certificate you already have.
+#
+# From your IT department's own certificate authority, or one you bought.
+# Put the certificate (with its chain) and its private key in ./volumes/certs
+# on the host, named exactly:
+#
+#   volumes/certs/cert.pem   (beside volumes/caddy-windows)
+#   volumes/certs/key.pem
+#
+# Caddy does not renew these; replace the files and restart the GoalGetterHTTPS
+# Windows service (Restart-Service GoalGetterHTTPS) before they expire.
+tls {$FRONT_DOOR_DATA}/../certs/cert.pem {$FRONT_DOOR_DATA}/../certs/key.pem

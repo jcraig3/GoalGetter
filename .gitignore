@@ -1,0 +1,73 @@
+# Secrets — never commit
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.pfx
+*.p12
+*.crt
+*.cer
+
+# Real data — database dumps and spreadsheet exports. A test fixture that must
+# be committed gets an explicit `!path/to/file` exception below.
+*.sql.gz
+*.dump
+*.bak
+*.sqlite
+*.db
+*.csv
+*.xls
+*.xlsx
+
+# Bind-mounted runtime data: ignore the contents, keep the folder structure so
+# a fresh clone has somewhere for Docker to mount.
+/volumes/**
+!/volumes/**/
+!/volumes/**/.gitkeep
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+
+# Node / frontend build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Build output that landed somewhere it should not have.
+#
+# A container build run with `--outDir /tmp/vbuild` from Git Bash had the path
+# rewritten to a Windows one, and Vite — whose working directory is bind-mounted
+# to ./web — created it *literally, as nested folders* inside the repo:
+# `web/C/Users/.../Temp/vbuild/`. 2.4 MB of build output got committed
+# before anybody noticed, and the character after the drive letter is U+F03A, the
+# private-use stand-in Windows uses for a colon it cannot store — which is why
+# Git could never stat those files and reported them as permanently deleted.
+#
+# Two guards, because either alone would have missed it: the temp output name,
+# and any directory named like a drive letter at any depth.
+**/vbuild/
+**/?/
+
+# Editors & OS
+# .vscode/settings.json is committed on purpose: it excludes volumes/ from the
+# file watcher, which everyone working here needs. Personal files (launch.json,
+# tasks.json) stay ignored.
+.vscode/*
+!.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# The Windows front door's downloaded Caddy (windows/install-front-door.ps1).
+/windows/caddy/

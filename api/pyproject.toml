@@ -1,0 +1,83 @@
+[project]
+name = "goalgetter-api"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "fastapi>=0.121.0",
+    "uvicorn[standard]>=0.40.0",
+    "sqlalchemy>=2.0.40",
+    "alembic>=1.16.0",
+    "psycopg[binary]>=3.2.0",
+    # MySQL and MariaDB for the SQL connector. Pure Python and about fifty
+    # kilobytes, so it earns its place in the default image; the heavier drivers
+    # are optional extras below.
+    "pymysql>=1.1.0",
+    # Snowflake, which is a connector of its own rather than only a dialect in a
+    # dropdown. It was an optional extra until it became something the picker
+    # offers by name, and a connector that is only ever "no driver installed" is
+    # worse than one that is absent. About 22 MB of wheels, most of it botocore
+    # pulled in for staged-file loading we never use — the honest price of the
+    # entry being real.
+    "snowflake-sqlalchemy>=1.7.0",
+    # Reading how long an uploaded clip is, and stripping what is attached to
+    # it.
+    #
+    # **Pure Python metadata, not a decoder.** Re-encoding audio would mean
+    # ffmpeg — tens of megabytes in the image and a subprocess per upload — to
+    # do a job the cap on size and duration already does. What is genuinely
+    # needed is the length, and the removal of ID3 tags, which can carry a
+    # name, a comment and an embedded picture into a file somebody thinks is
+    # only a sound.
+    "mutagen>=1.47.0",
+    "pydantic-settings>=2.7.0",
+    "bcrypt>=4.2.0",
+    "email-validator>=2.2.0",
+    "cryptography>=44.0.0",
+    "httpx>=0.28.0",
+    "pyjwt[crypto]>=2.10.0",
+    # Proving an upload is an image, and making it one shape.
+    #
+    # **Not optional, and not replaceable by checking the extension.** A file
+    # named .jpg that is not one is the oldest upload hole there is; the only
+    # honest test is decoding it. Pillow also does the two things that have to
+    # happen before a staff photo is stored: crop it to a square so every avatar
+    # is one size, and drop the EXIF — a photo taken on a phone carries the GPS
+    # coordinates of wherever it was taken.
+    "pillow>=11.0.0",
+]
+
+# Installed in development only. The production image runs `pip install .`
+# without this extra, so no test dependency ships to a deployment.
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.0",
+    "pytest-cov>=6.0.0",
+]
+
+# Database drivers that are too heavy, or need system libraries, to install for
+# every deployment. A build that wants one passes it as a build argument:
+#
+#     docker compose build --build-arg API_EXTRAS="[redshift]" api
+#
+# `app/connectors/sql.py` checks for each driver by import, so a dialect that is
+# not installed is never offered rather than failing when somebody tries it.
+# Snowflake moved into the default dependencies above — it has its own connector
+# now, so it has to be present for that connector to mean anything.
+redshift = ["sqlalchemy-redshift>=0.12.0", "redshift-connector>=2.1.0"]
+# Also needs unixODBC and a Microsoft driver in the image, which pip cannot do.
+mssql = ["pyodbc>=5.2.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# Show the reason for every non-passing outcome, and make a bare `pytest`
+# report skips — a silently skipped test is worse than a failing one, because
+# it looks like coverage that isn't there.
+addopts = "-ra --strict-markers"
+filterwarnings = ["error::DeprecationWarning:app.*"]
+
+[build-system]
+requires = ["setuptools>=80"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["app*"]

@@ -1,0 +1,22 @@
+# Production overlay — everything baked into images.
+#
+# No source mounts and no install-at-boot: the image is the artifact. That
+# makes a deploy atomic (a new image means Compose recreates the container) and
+# means a container start does not depend on the network reaching a package
+# registry.
+#
+# The webbuild watcher simply does not exist here.
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
+    # No ports: the API is reachable only through nginx.
+    # The entrypoint applies migrations before uvicorn starts.
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+    # No volume overlay — nginx serves the build baked into the image.

@@ -1,0 +1,35 @@
+# Keeps the build context small and stops secrets or host-built artifacts from
+# being copied into an image.
+
+.git
+.github
+documentation
+deploy
+*.md
+
+# Secrets must never enter an image layer.
+.env
+.env.*
+!.env.example
+
+# Runtime data — never belongs in a build.
+volumes/
+
+# Host node_modules may hold Windows-native binaries that break in a Linux
+# image. The build installs its own.
+web/node_modules
+web/dist
+
+api/.venv
+api/**/__pycache__
+api/.pytest_cache
+api/.mypy_cache
+api/.ruff_cache
+
+# Tests are development infrastructure, not runtime code. The production image
+# installs `pip install .` without the `dev` extra, so pytest is absent and
+# nothing here could run anyway — copying them in is dead weight in a layer.
+# They stay in the repository forever; they just do not ship.
+api/tests
+web/src/**/*.test.ts
+web/src/**/*.test.tsx

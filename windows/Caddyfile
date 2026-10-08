@@ -1,0 +1,70 @@
+# GoalGetter — the HTTPS front door on Windows itself (Phase 17).
+#
+# Docker Desktop hides every device's address from anything inside Docker.
+# This runs outside it, as a Windows service, so it sees each device first and
+# passes its address on in X-Forwarded-For — which GoalGetter then uses for
+# per-device sign-in limits. Installed by install-front-door.ps1, which also
+# moves Docker's ports to this computer only (docker-compose.frontdoor.yml).
+#
+# Reads GoalGetter's own .env (`caddy run --envfile`), so there is one place
+# for every setting: HTTPS_HOST, HTTPS_CERTIFICATE, HTTPS_PORT, HTTP_PORT,
+# APP_PORT, and DNS_PROVIDER / DNS_API_TOKEN / ACME_EMAIL for Let's Encrypt.
+# FRONT_DOOR_DATA (written by the installer) is where certificates live.
+{
+	admin off
+	storage file_system {$FRONT_DOOR_DATA}
+	http_port {$HTTP_PORT:80}
+	https_port {$HTTPS_PORT:443}
+
+	pki {
+		ca local {
+			name "GoalGetter Local Authority"
+		}
+	}
+
+	# Never adds its authority to Windows' trusted certificates by itself:
+	# that is a change to the whole machine, made where nobody sees it. The
+	# server trusts it like any other device — documentation/20-hosting.md.
+	skip_install_trust
+}
+
+# ── Plain HTTP on the name: the root certificate, and on to https ────────────
+http://{$HTTPS_HOST} {
+	handle /goalgetter-root.crt {
+		root * {$FRONT_DOOR_DATA}/pki/authorities/local
+		rewrite * /root.crt
+		header Content-Type application/x-x509-ca-cert
+		header Content-Disposition "attachment; filename=goalgetter-root.crt"
+		file_server
+	}
+	handle {
+		redir https://{host}:{$HTTPS_PORT:443}{uri} permanent
+	}
+}
+
+# ── The app, over HTTPS ──────────────────────────────────────────────────────
+https://{$HTTPS_HOST} {
+	import tls/{$HTTPS_CERTIFICATE:internal}.caddy
+
+	handle /goalgetter-root.crt {
+		root * {$FRONT_DOOR_DATA}/pki/authorities/local
+		rewrite * /root.crt
+		header Content-Type application/x-x509-ca-cert
+		header Content-Disposition "attachment; filename=goalgetter-root.crt"
+		file_server
+	}
+
+	handle {
+		# nginx's listener for the HTTPS path, reachable from this computer
+		# only. Caddy ends X-Forwarded-For with the device that connected —
+		# the address Docker would otherwise hide.
+		reverse_proxy 127.0.0.1:{$FRONT_DOOR_HTTPS_PORT:8091}
+	}
+}
+
+# ── The plain port, for TVs ──────────────────────────────────────────────────
+# Any name or address, as TVs are told: http://<server>:8080/pair. nginx
+# serves a TV's pages there and sends everything else to the HTTPS address.
+http://:{$APP_PORT:8080} {
+	reverse_proxy 127.0.0.1:{$FRONT_DOOR_PLAIN_PORT:8090}
+}

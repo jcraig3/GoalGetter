@@ -1,0 +1,14 @@
+# Shell scripts must stay LF. Git on Windows converts to CRLF by default, and a
+# CRLF shebang is not executable on Linux — the container fails to start with a
+# confusing error.
+*.sh text eol=lf
+
+# Same reasoning: these are read by Linux tooling inside containers.
+Dockerfile text eol=lf
+*.Dockerfile text eol=lf
+*.conf text eol=lf
+Caddyfile text eol=lf
+*.caddy text eol=lf
+.env.example text eol=lf
+*.inc text eol=lf
+windows/Caddyfile text eol=lf
