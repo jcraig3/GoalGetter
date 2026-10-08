@@ -58,7 +58,7 @@ No Python, Node or database to install: everything runs inside Docker.
 
 1. **Get the code.** In a terminal (on Windows, **PowerShell**):
    ```bash
-   git clone https://github.com/YOUR-ACCOUNT/GoalGetter.git
+   git clone https://github.com/jcraig3/GoalGetter.git
    cd GoalGetter
    ```
 2. **Create your settings.** This writes `.env` with fresh random passwords
