@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GoalGetter · Sales goals, live leaderboards and TV walls</title>
+  <meta name="description" content="GoalGetter turns your sales numbers into live leaderboards, goals with pace, competitions and celebrations on the office TV. Take the interactive tour.">
+  <meta name="theme-color" content="#0b0e14">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>document.documentElement.classList.add('js');try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="demo/styling/app.css">
+  <link rel="stylesheet" href="demo/styling/wall.css">
+  <link rel="stylesheet" href="demo/styling/site.css">
+  <script src="demo/js/demo.js" defer></script>
+  <script src="demo/js/pages.js" defer></script>
+  <script src="demo/js/site.js" defer></script>
+</head>
+<body class="site" data-page="landing">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- ============================== NAV ============================== -->
+  <header class="nav" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="#top" aria-label="GoalGetter, back to top">
+        <span class="brand-mark"><i data-icon="target"></i></span>
+        <span>GoalGetter</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#tv">TV wall</a>
+        <a href="#roles">Roles</a>
+        <a href="#data">Data</a>
+        <div class="mega-wrap">
+          <button type="button" class="mega-btn" aria-expanded="false" aria-controls="mega" data-mega>
+            Demo pages <i data-icon="chevron" class="sm"></i>
+          </button>
+          <div class="mega" id="mega" hidden>
+            <div class="mega-head">
+              <div>
+                <strong>The interactive tour</strong>
+                <span>Thirteen pages, each a working copy of the real screen.</span>
+              </div>
+              <a class="btn-site btn-site-primary sm" href="demo/home.html">Start at step 1 <i data-icon="right" class="sm"></i></a>
+            </div>
+            <div class="mega-grid">
+              <a href="demo/home.html"><span class="mi"><i data-icon="home"></i></span><span><b>Home</b><small>Where things stand today</small></span></a>
+              <a href="demo/leaderboards.html"><span class="mi"><i data-icon="trophy"></i></span><span><b>Leaderboards</b><small>Live rankings for any metric</small></span></a>
+              <a href="demo/goals.html"><span class="mi"><i data-icon="target"></i></span><span><b>Goals</b><small>Targets with pace</small></span></a>
+              <a href="demo/competitions.html"><span class="mi"><i data-icon="flag"></i></span><span><b>Competitions</b><small>Time-boxed contests</small></span></a>
+              <a href="demo/announcements.html"><span class="mi"><i data-icon="megaphone"></i></span><span><b>Announcements</b><small>Wins and shout-outs</small></span></a>
+              <a href="demo/users.html"><span class="mi"><i data-icon="users"></i></span><span><b>Users</b><small>People, roles and access</small></span></a>
+              <a href="demo/teams.html"><span class="mi"><i data-icon="users"></i></span><span><b>Teams</b><small>Groups that compete together</small></span></a>
+              <a href="demo/offices.html"><span class="mi"><i data-icon="building"></i></span><span><b>Offices</b><small>Locations and time zones</small></span></a>
+              <a href="demo/channels.html"><span class="mi"><i data-icon="tv"></i></span><span><b>TVs &amp; Channels</b><small>What plays on the walls</small></span></a>
+              <a href="demo/tv-wall.html"><span class="mi"><i data-icon="tv"></i></span><span><b>The TV wall</b><small>Full-screen, across the room</small></span></a>
+              <a href="demo/reporting.html"><span class="mi"><i data-icon="chart"></i></span><span><b>Reporting</b><small>Who needs a conversation</small></span></a>
+              <a href="demo/integrations.html"><span class="mi"><i data-icon="plug"></i></span><span><b>Integrations</b><small>Getting your data in</small></span></a>
+              <a href="demo/admin.html"><span class="mi"><i data-icon="settings"></i></span><span><b>Admin &amp; Settings</b><small>Branding, inbox, assets</small></span></a>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div class="nav-actions">
+        <button type="button" class="nav-icon" data-theme-toggle aria-label="Switch theme"></button>
+        <a class="btn-site btn-site-primary nav-cta" href="demo/home.html">Start the tour</a>
+        <button type="button" class="nav-icon nav-burger" aria-expanded="false" aria-controls="drawer" aria-label="Open menu" data-burger><i data-icon="menu"></i></button>
+      </div>
+    </div>
+
+    <div class="drawer-site" id="drawer" hidden>
+      <div class="container">
+        <div class="drawer-links">
+          <a href="#how">How it works</a>
+          <a href="#features">Features</a>
+          <a href="#tv">TV wall</a>
+          <a href="#roles">Roles</a>
+          <a href="#data">Data</a>
+        </div>
+        <p class="drawer-label">Demo pages</p>
+        <div class="drawer-grid" data-copy-of=".mega-grid"></div>
+        <a class="btn-site btn-site-primary block" href="demo/home.html">Start the tour <i data-icon="right" class="sm"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero" id="top">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <a class="eyebrow" href="demo/tv-wall.html">
+            <span class="eyebrow-dot"></span> New · Celebrations take over every TV <i data-icon="right" class="sm"></i>
+          </a>
+          <h1 class="hero-title">Make every number <span class="grad">worth chasing.</span></h1>
+          <p class="hero-sub">
+            GoalGetter turns your sales data into live leaderboards, goals that show pace, head-to-head competitions
+            and a TV wall that stops the room when someone wins. You run it on your own servers, so your data stays with you.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn-site btn-site-primary lg" href="demo/home.html">Start the interactive tour <i data-icon="right" class="sm"></i></a>
+            <a class="btn-site btn-site-ghost lg" href="demo/tv-wall.html"><i data-icon="play" class="sm"></i> See the TV wall</a>
+          </div>
+          <ul class="hero-meta">
+            <li><i data-icon="check" class="sm"></i> No sign-up</li>
+            <li><i data-icon="check" class="sm"></i> 13 interactive pages</li>
+            <li><i data-icon="check" class="sm"></i> Fictional company and people</li>
+          </ul>
+        </div>
+
+        <div class="hero-visual" aria-label="A preview of a live GoalGetter leaderboard">
+          <div class="mock">
+            <div class="mock-bar">
+              <span class="dots"><i></i><i></i><i></i></span>
+              <span class="mock-url">goalgetter.stark.example/leaderboards</span>
+            </div>
+            <div class="mock-top">
+              <span class="org-logo"><span class="arc"></span>Stark</span>
+              <span class="mock-product">GoalGetter</span>
+              <span class="grow"></span>
+              <span class="live-chip"><span class="pulse"></span>Live</span>
+            </div>
+            <div class="mock-body">
+              <div class="mock-head">
+                <div>
+                  <div class="mock-title">Revenue · October</div>
+                  <div class="mock-sub">Everyone · resets monthly</div>
+                </div>
+                <span class="pill brand">Always live</span>
+              </div>
+              <ol class="mini-board" id="hero-board"></ol>
+            </div>
+          </div>
+
+          <div class="float float-goal">
+            <div class="fg-ring" style="--p:78">
+              <svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.5"/><circle class="fg" cx="18" cy="18" r="15.5"/></svg>
+              <b>78%</b>
+            </div>
+            <div>
+              <div class="fl-k">Calls · This week</div>
+              <div class="fl-v">195 of 250</div>
+              <div class="fl-s c-success">Ahead of pace</div>
+            </div>
+          </div>
+
+          <div class="float float-win" id="hero-win">
+            <span class="fw-trophy">🏆</span>
+            <div>
+              <div class="fl-k">Goal hit</div>
+              <div class="fl-v" id="hero-win-text">Mike Trout hit $60K revenue</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== STRIP ============================== -->
+    <section class="strip" aria-label="Highlights">
+      <div class="container strip-inner">
+        <div class="strip-item"><b data-count-to="13">0</b><span>interactive demo pages</span></div>
+        <div class="strip-item"><b data-count-to="5">0</b><span>TV scene types</span></div>
+        <div class="strip-item"><b data-count-to="9">0</b><span>ways to bring data in</span></div>
+        <div class="strip-item"><b>0</b><span>numbers typed in by agents</span></div>
+      </div>
+    </section>
+
+    <!-- ============================== HOW ============================== -->
+    <section class="section" id="how">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="kicker">How it works</span>
+          <h2>One loop, from the data to the celebration.</h2>
+          <p>Data comes in. It becomes a metric. A goal is set on that metric. Progress is ranked and put on screen. Hitting the goal gets celebrated.</p>
+        </header>
+
+        <ol class="loop">
+          <li class="loop-step reveal">
+            <span class="loop-n">1</span>
+            <span class="loop-icon"><i data-icon="database"></i></span>
+            <h3>Data in</h3>
+            <p>Upload a spreadsheet or connect a sheet, a database or a webhook. Agents never type in their own numbers, so the board is one people trust.</p>
+            <div class="chips"><span>CSV / Excel</span><span>Sheets</span><span>SQL</span><span>Webhook</span></div>
+            <a class="more" href="demo/integrations.html">Integrations <i data-icon="right" class="sm"></i></a>
+          </li>
+          <li class="loop-step reveal" style="--d:120ms">
+            <span class="loop-n">2</span>
+            <span class="loop-icon"><i data-icon="target"></i></span>
+            <h3>Measure</h3>
+            <p>Each row becomes a metric: revenue, calls, appointments, deals. Set goals for a person, a team, an office or the whole company, over any period.</p>
+            <div class="chips"><span>Metrics</span><span>Goals</span><span>Periods</span><span>Pace</span></div>
+            <a class="more" href="demo/goals.html">Goals <i data-icon="right" class="sm"></i></a>
+          </li>
+          <li class="loop-step reveal" style="--d:240ms">
+            <span class="loop-n">3</span>
+            <span class="loop-icon"><i data-icon="trophy"></i></span>
+            <h3>Motivate</h3>
+            <p>Live leaderboards, time-boxed competitions, shout-outs and a TV wall. When a goal is hit, every screen in the office celebrates.</p>
+            <div class="chips"><span>Leaderboards</span><span>Competitions</span><span>TV wall</span></div>
+            <a class="more" href="demo/leaderboards.html">Leaderboards <i data-icon="right" class="sm"></i></a>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============================== FEATURES ============================== -->
+    <section class="section alt" id="features">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="kicker">Features</span>
+          <h2>Everything a sales floor looks at, in one place.</h2>
+          <p>Each card opens the matching page of the tour. They are working copies of the real screens, filled with a fictional company.</p>
+        </header>
+
+        <div class="bento">
+          <a class="feat feat-wide reveal" href="demo/home.html">
+            <div class="feat-copy">
+              <span class="feat-icon"><i data-icon="home"></i></span>
+              <h3>Home</h3>
+              <p>Where things stand today: your goals with pace, your rank on every board, the competitions you are in and the latest wins.</p>
+              <span class="more">Open Home <i data-icon="right" class="sm"></i></span>
+            </div>
+            <div class="feat-art art-home" aria-hidden="true">
+              <div class="ah-card">
+                <div class="row-between"><span class="fl-k">Revenue · October</span><span class="pill success">On pace</span></div>
+                <div class="ah-big">$48,250 <small>of $60,000</small></div>
+                <div class="progress"><div class="progress-fill" data-w="80"></div><span class="progress-marker" style="left:72%"></span></div>
+              </div>
+              <div class="ah-card">
+                <div class="row-between"><span class="fl-k">Deals · This week</span><span class="pill warning">Behind</span></div>
+                <div class="ah-big">4 <small>of 6</small></div>
+                <div class="progress"><div class="progress-fill" data-w="66"></div><span class="progress-marker" style="left:80%"></span></div>
+              </div>
+            </div>
+          </a>
+
+          <a class="feat feat-tall reveal" href="demo/leaderboards.html" style="--d:80ms">
+            <div class="feat-copy">
+              <span class="feat-icon"><i data-icon="trophy"></i></span>
+              <h3>Leaderboards</h3>
+              <p>Any metric, ranked for people, teams or offices. Rows slide to their new place as numbers arrive.</p>
+              <span class="more">Open Leaderboards <i data-icon="right" class="sm"></i></span>
+            </div>
+            <ol class="mini-board compact" id="feat-board" aria-hidden="true"></ol>
+          </a>
+
+          <a class="feat reveal" href="demo/goals.html">
+            <span class="feat-icon"><i data-icon="target"></i></span>
+            <h3>Goals</h3>
+            <p>Targets that show pace, not just progress, so “behind” shows up while there is still time to fix it.</p>
+            <span class="more">Open Goals <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat reveal" href="demo/competitions.html" style="--d:80ms">
+            <span class="feat-icon"><i data-icon="flag"></i></span>
+            <h3>Competitions</h3>
+            <p>Races, head-to-heads and team battles with a countdown, prizes and a podium at the end.</p>
+            <div class="countdown-mini" aria-hidden="true"><span><b>02</b>d</span><span><b>14</b>h</span><span><b>37</b>m</span></div>
+            <span class="more">Open Competitions <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat reveal" href="demo/announcements.html" style="--d:160ms">
+            <span class="feat-icon"><i data-icon="megaphone"></i></span>
+            <h3>Announcements</h3>
+            <p>Wins, shout-outs and news. Post them to the feed, the TVs, or both.</p>
+            <div class="shout" aria-hidden="true"><span data-avatar="Natasha Romanoff" data-size="xs"></span><span>“Closed the Oscorp renewal in one call.”</span></div>
+            <span class="more">Open Announcements <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat reveal" href="demo/users.html">
+            <span class="feat-icon"><i data-icon="users"></i></span>
+            <h3>Users</h3>
+            <p>Invite people, set their role and team, and see who is signed in. Managers only see their own team.</p>
+            <div class="avatar-row" aria-hidden="true">
+              <span data-avatar="Peter Parker" data-size="xs"></span><span data-avatar="Diana Prince" data-size="xs"></span><span data-avatar="Justin Herbert" data-size="xs"></span><span data-avatar="Mike Trout" data-size="xs"></span><span data-avatar="Barry Allen" data-size="xs"></span><span class="more-n">+28</span>
+            </div>
+            <span class="more">Open Users <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat reveal" href="demo/teams.html" style="--d:80ms">
+            <span class="feat-icon"><i data-icon="users"></i></span>
+            <h3>Teams</h3>
+            <p>Each team gets a colour, a manager and a home office. Teams can compete against each other.</p>
+            <div class="team-chips" aria-hidden="true">
+              <span style="--c:#b91c1c">AVG</span><span style="--c:#1d4ed8">JL</span><span style="--c:#0e7490">BLT</span><span style="--c:#c2410c">HLO</span><span style="--c:#7c3aed">SPF</span>
+            </div>
+            <span class="more">Open Teams <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat reveal" href="demo/offices.html" style="--d:160ms">
+            <span class="feat-icon"><i data-icon="building"></i></span>
+            <h3>Offices</h3>
+            <p>Locations with their own time zones, so “today” and “this week” match each office’s local clock.</p>
+            <div class="tz-row" aria-hidden="true"><span>Gotham</span><span>Metropolis</span><span>Star City</span><span>Central City</span></div>
+            <span class="more">Open Offices <i data-icon="right" class="sm"></i></span>
+          </a>
+
+          <a class="feat feat-wide reveal" href="demo/channels.html">
+            <div class="feat-copy">
+              <span class="feat-icon"><i data-icon="tv"></i></span>
+              <h3>TVs &amp; Channels</h3>
+              <p>A channel is a playlist of slides. Pair a TV with a short code and it plays that channel. No one has to sign in on the TV.</p>
+              <span class="more">Open Channels <i data-icon="right" class="sm"></i></span>
+            </div>
+            <div class="feat-art art-channels" aria-hidden="true">
+              <div class="pair">
+                <span class="fl-k">Pairing code</span>
+                <div class="code"><span>K</span><span>7</span><span>Q</span><span>-</span><span>4</span><span>M</span><span>X</span></div>
+              </div>
+              <div class="slides">
+                <span class="s s-podium">Podium</span><span class="s s-race">Race</span><span class="s s-gauge">Goal</span><span class="s s-news">News</span>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="more-row">
+          <a class="mini-feat reveal" href="demo/reporting.html"><span class="feat-icon sm"><i data-icon="chart"></i></span><span><b>Reporting</b><small>Who needs a conversation this week</small></span><i data-icon="right" class="sm"></i></a>
+          <a class="mini-feat reveal" href="demo/integrations.html" style="--d:80ms"><span class="feat-icon sm"><i data-icon="plug"></i></span><span><b>Integrations &amp; Metrics</b><small>Map columns once, sync on a schedule</small></span><i data-icon="right" class="sm"></i></a>
+          <a class="mini-feat reveal" href="demo/admin.html" style="--d:160ms"><span class="feat-icon sm"><i data-icon="settings"></i></span><span><b>Admin &amp; Settings</b><small>Branding, inbox and assets</small></span><i data-icon="right" class="sm"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TV ============================== -->
+    <section class="section tv-section" id="tv">
+      <div class="container tv-grid">
+        <div class="tv-copy reveal">
+          <span class="kicker">The TV wall</span>
+          <h2>Readable from across the room. Alive all day.</h2>
+          <p>The wall rotates through a podium, a race track, a goal gauge, head-to-heads and news. When someone hits a goal, every screen stops for a trophy, confetti and their walk-up song.</p>
+          <ul class="ticks">
+            <li><i data-icon="check" class="sm"></i> Big type and a dark background that won’t glare</li>
+            <li><i data-icon="check" class="sm"></i> TVs pair with a code, not someone’s login</li>
+            <li><i data-icon="check" class="sm"></i> A banner drops in the moment someone overtakes</li>
+          </ul>
+          <div class="hero-ctas">
+            <button type="button" class="btn-site btn-site-primary" id="tv-celebrate">🏆 Play a celebration</button>
+            <a class="btn-site btn-site-ghost" href="demo/tv-wall.html">Open the TV wall <i data-icon="right" class="sm"></i></a>
+          </div>
+        </div>
+        <div class="tv-frame reveal" style="--d:120ms">
+          <div class="stage" id="site-stage" aria-label="A live preview of the GoalGetter TV wall"></div>
+          <div class="tv-stand" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== ROLES ============================== -->
+    <section class="section" id="roles">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="kicker">Built for every seat</span>
+          <h2>Everyone sees what they need, and nothing they shouldn’t.</h2>
+          <p>There are three roles plus the TV. The tour lets you switch between them at any time to see what each one sees.</p>
+        </header>
+
+        <div class="roles reveal">
+          <div class="role-tabs" role="tablist" aria-label="Roles">
+            <button type="button" role="tab" aria-selected="true" aria-controls="role-agent" id="rt-agent" data-role-tab="agent"><i data-icon="target" class="sm"></i> Agent</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="role-manager" id="rt-manager" data-role-tab="manager"><i data-icon="users" class="sm"></i> Manager</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="role-admin" id="rt-admin" data-role-tab="admin"><i data-icon="settings" class="sm"></i> Admin</button>
+            <button type="button" role="tab" aria-selected="false" aria-controls="role-tv" id="rt-tv" data-role-tab="tv"><i data-icon="tv" class="sm"></i> TV</button>
+          </div>
+
+          <div class="role-panel" role="tabpanel" id="role-agent" aria-labelledby="rt-agent">
+            <div>
+              <h3>“Where do I stand, and what do I need today?”</h3>
+              <p>Agents see their own goals with pace, their rank on every board, the competitions they are in and the shout-outs they get. Their numbers come from your systems, never from a form.</p>
+              <ul class="ticks">
+                <li><i data-icon="check" class="sm"></i> Personal goals with an “expected by today” marker</li>
+                <li><i data-icon="check" class="sm"></i> Your own row pinned on every leaderboard</li>
+                <li><i data-icon="check" class="sm"></i> Alerts when someone passes you</li>
+              </ul>
+              <a class="btn-site btn-site-primary" href="demo/home.html" data-as-role="agent">Tour as Peter Parker, agent <i data-icon="right" class="sm"></i></a>
+            </div>
+            <div class="role-art">
+              <div class="persona"><span data-avatar="Peter Parker"></span><div><b>Peter Parker</b><small>Agent · Avengers · Gotham</small></div></div>
+              <div class="stat-tiles">
+                <div><span>Revenue rank</span><b>#12</b></div>
+                <div><span>Calls rank</span><b class="c-success">#3</b></div>
+                <div><span>Goals on pace</span><b>3 of 4</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-panel" role="tabpanel" id="role-manager" aria-labelledby="rt-manager" hidden>
+            <div>
+              <h3>“Who needs a conversation this week?”</h3>
+              <p>Managers set goals for their team, start competitions, post shout-outs and check reporting on who is falling behind. They only see their own team.</p>
+              <ul class="ticks">
+                <li><i data-icon="check" class="sm"></i> Set goals for a person or the whole team at once</li>
+                <li><i data-icon="check" class="sm"></i> Launch a race or head-to-head in a minute</li>
+                <li><i data-icon="check" class="sm"></i> Reporting that shows who has missed their goal for several periods in a row</li>
+              </ul>
+              <a class="btn-site btn-site-primary" href="demo/reporting.html" data-as-role="manager">Tour as a manager <i data-icon="right" class="sm"></i></a>
+            </div>
+            <div class="role-art">
+              <div class="persona"><span data-avatar="Steve Rogers"></span><div><b>Steve Rogers</b><small>Manager · Avengers</small></div></div>
+              <div class="stat-tiles">
+                <div><span>Team on pace</span><b class="c-success">5 of 6</b></div>
+                <div><span>Live competitions</span><b>2</b></div>
+                <div><span>Needs a chat</span><b class="c-warning">1</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-panel" role="tabpanel" id="role-admin" aria-labelledby="rt-admin" hidden>
+            <div>
+              <h3>“Is the data right, and does it look like us?”</h3>
+              <p>Admins connect data sources, define metrics, organise people into teams and offices, brand the app and fix bad rows. Every correction is logged and marked as corrected.</p>
+              <ul class="ticks">
+                <li><i data-icon="check" class="sm"></i> Brand colour, logo and TV backgrounds</li>
+                <li><i data-icon="check" class="sm"></i> An inbox for rows that need a decision</li>
+                <li><i data-icon="check" class="sm"></i> Single sign-on or local accounts</li>
+              </ul>
+              <a class="btn-site btn-site-primary" href="demo/admin.html" data-as-role="admin">Tour as an admin <i data-icon="right" class="sm"></i></a>
+            </div>
+            <div class="role-art">
+              <div class="persona"><span data-avatar="Pepper Potts"></span><div><b>Pepper Potts</b><small>Admin · Stark Industries</small></div></div>
+              <div class="stat-tiles">
+                <div><span>Sources healthy</span><b class="c-success">4 of 5</b></div>
+                <div><span>Inbox</span><b class="c-warning">3</b></div>
+                <div><span>People</span><b>33</b></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="role-panel" role="tabpanel" id="role-tv" aria-labelledby="rt-tv" hidden>
+            <div>
+              <h3>“What’s happening on the floor right now?”</h3>
+              <p>A TV is not a person. It pairs with a short code, plays the channel it was given and shows nothing it shouldn’t.</p>
+              <ul class="ticks">
+                <li><i data-icon="check" class="sm"></i> Pair once and it reconnects by itself</li>
+                <li><i data-icon="check" class="sm"></i> Different channels for different floors</li>
+                <li><i data-icon="check" class="sm"></i> Celebrations interrupt every screen</li>
+              </ul>
+              <a class="btn-site btn-site-primary" href="demo/tv-wall.html">Open the TV wall <i data-icon="right" class="sm"></i></a>
+            </div>
+            <div class="role-art">
+              <div class="persona"><span class="tv-ico"><i data-icon="tv"></i></span><div><b>Gotham sales floor</b><small>Channel · Sales floor · 5 slides</small></div></div>
+              <div class="stat-tiles">
+                <div><span>Status</span><b class="c-success">Online</b></div>
+                <div><span>Slide</span><b>7s</b></div>
+                <div><span>Paired</span><b>K7Q-4MX</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== DATA ============================== -->
+    <section class="section alt" id="data">
+      <div class="container data-grid">
+        <div class="reveal">
+          <span class="kicker">Your data, your servers</span>
+          <h2>Starts with a spreadsheet. Grows with your stack.</h2>
+          <p>GoalGetter runs inside your own network with one Docker command. A company with no CRM and no data warehouse can upload a spreadsheet and be live the same afternoon. Connectors make it faster, but you don’t need any of them to start.</p>
+          <ul class="ticks">
+            <li><i data-icon="check" class="sm"></i> Self-hosted: one company, one deployment, no subscription</li>
+            <li><i data-icon="check" class="sm"></i> Single sign-on or local accounts</li>
+            <li><i data-icon="check" class="sm"></i> Every admin correction is audited and visibly marked</li>
+          </ul>
+          <a class="btn-site btn-site-ghost" href="demo/integrations.html">See integrations <i data-icon="right" class="sm"></i></a>
+        </div>
+        <div class="conn-cloud reveal" style="--d:120ms" aria-label="Data sources">
+          <div class="hub"><span class="brand-mark lg"><i data-icon="target"></i></span><b>GoalGetter</b></div>
+          <span class="node n1"><span class="conn" style="background:#16a34a">CSV</span>CSV / Excel</span>
+          <span class="node n2"><span class="conn" style="background:#0f9d58">GS</span>Google Sheets</span>
+          <span class="node n3"><span class="conn" style="background:#107c41">XL</span>Excel online</span>
+          <span class="node n4"><span class="conn" style="background:#2563eb"><i data-icon="database" class="sm"></i></span>Snowflake</span>
+          <span class="node n5"><span class="conn" style="background:#334155"><i data-icon="database" class="sm"></i></span>SQL</span>
+          <span class="node n6"><span class="conn" style="background:#475569"><i data-icon="plug" class="sm"></i></span>Webhook</span>
+          <svg class="wires" viewBox="0 0 400 400" aria-hidden="true" preserveAspectRatio="none">
+            <path d="M200 200 L60 70"/><path d="M200 200 L340 70"/><path d="M200 200 L30 200"/><path d="M200 200 L370 200"/><path d="M200 200 L60 330"/><path d="M200 200 L340 330"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== TOUR ============================== -->
+    <section class="section" id="tour">
+      <div class="container">
+        <header class="section-head reveal">
+          <span class="kicker">The tour</span>
+          <h2>Thirteen stops, about ten minutes.</h2>
+          <p>Each stop has a guide panel and numbered markers that point out what matters. Use the arrow keys to move between pages.</p>
+        </header>
+        <ol class="tour-list" id="tour-list"></ol>
+      </div>
+    </section>
+
+    <!-- ============================== CTA ============================== -->
+    <section class="cta" id="get-started">
+      <div class="container">
+        <div class="cta-card reveal">
+          <div class="cta-glow" aria-hidden="true"></div>
+          <h2>See it for yourself.</h2>
+          <p>Walk through GoalGetter as Peter Parker at Stark Industries. Switch roles, press buttons, set off a celebration. Nothing you do here is saved.</p>
+          <div class="hero-ctas center">
+            <a class="btn-site btn-site-primary lg" href="demo/home.html">Start the interactive tour <i data-icon="right" class="sm"></i></a>
+            <a class="btn-site btn-site-ghost lg" href="demo/leaderboards.html">Jump to Leaderboards</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================== FOOTER ============================== -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div>
+        <a class="brand" href="#top"><span class="brand-mark"><i data-icon="target"></i></span><span>GoalGetter</span></a>
+        <p class="footer-note">Sales goals, live leaderboards and TV walls. Self-hosted.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <a href="#how">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#tv">TV wall</a>
+        <a href="#data">Data</a>
+      </div>
+      <div>
+        <h4>Tour</h4>
+        <a href="demo/home.html">Home</a>
+        <a href="demo/leaderboards.html">Leaderboards</a>
+        <a href="demo/goals.html">Goals</a>
+        <a href="demo/competitions.html">Competitions</a>
+        <a href="demo/announcements.html">Announcements</a>
+      </div>
+      <div>
+        <h4>Organise</h4>
+        <a href="demo/users.html">Users</a>
+        <a href="demo/teams.html">Teams</a>
+        <a href="demo/offices.html">Offices</a>
+        <a href="demo/channels.html">TVs &amp; Channels</a>
+        <a href="demo/admin.html">Admin</a>
+      </div>
+    </div>
+    <div class="container footer-base">
+      <span>Demo only. Stark Industries and every person shown are fictional, and all data is made up.</span>
+      <button type="button" class="link-btn" data-theme-toggle-text>Switch to light theme</button>
+    </div>
+  </footer>
+</body>
+</html>
