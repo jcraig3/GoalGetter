@@ -1,4 +1,5 @@
 # GoalGetter
+### Take the [guided tour](https://jcraig3.github.io/GoalGetter/) for more details.
 
 Self-hosted sales performance and gamification. Set goals, rank agents and
 teams, run competitions, celebrate wins, and put live leaderboards on the
