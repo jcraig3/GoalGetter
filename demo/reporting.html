@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reporting · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: reporting for managers.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="reporting">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent">Agents do not see Reporting — every answer on it is a list of people to talk to. It is shown here so you can explore it.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Reporting</h1>
+          <p>Who needs a conversation, and what about.</p>
+        </div>
+        <div class="page-actions">
+          <select class="select" aria-label="Team" style="margin:0;width:auto"><option>All teams</option><option>Avengers</option><option>Justice League</option><option>Bolt Squad</option><option>Halo Crew</option><option>Speed Force</option></select>
+          <button class="btn btn-secondary" data-toast="Downloaded reporting-october.csv (exports are always light, for printing)">Export CSV</button>
+        </div>
+      </div>
+
+      <div class="stat-row mb-6" id="report-kpis">
+        <div class="stat"><p class="text-caption uppercase c-subtle">Goals running</p><p class="stat-v num" data-count-to="38">38</p><p class="text-xs c-subtle">this period</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">On track or better</p><p class="stat-v num c-success"><span data-count-to="71">71</span>%</p><p class="text-xs c-success">▲ 6 pts vs September</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">Behind</p><p class="stat-v num c-warning" data-count-to="9">9</p><p class="text-xs c-subtle">people to talk to</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">Hit last month</p><p class="stat-v num"><span data-count-to="64">64</span>%</p><p class="text-xs c-subtle">of goals that finished</p></div>
+      </div>
+
+      <section id="at-risk">
+        <div class="row-between mb-4"><h2 class="text-h3">Behind pace</h2><span class="text-xs c-subtle">Sorted by how far behind expected</span></div>
+        <div class="table-wrap">
+          <table class="gg gg-stack">
+            <thead><tr><th>Who</th><th>Goal</th><th style="min-width:12rem">Progress vs. expected</th><th class="right">Gap</th><th class="right"><span class="sr-only">Action</span></th></tr></thead>
+            <tbody>
+              <tr><td data-primary><div class="who"><span data-avatar="Billy Batson"></span><div><p class="name">Billy Batson</p><p class="sub">Speed Force</p></div></div></td><td data-label="Goal">Revenue · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="44" style="background:var(--gg-warning)"></div><span class="progress-marker" style="left:61%"></span></div><p class="text-xs c-subtle mt-1">44% · expected 61%</p></td><td data-label="Gap" class="right num c-warning">−$10,200</td><td data-actions class="right"><button class="btn btn-secondary btn-xs" data-toast="Coaching note started for Billy Batson">Coach</button></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Arthur Curry"></span><div><p class="name">Arthur Curry</p><p class="sub">Justice League</p></div></div></td><td data-label="Goal">Appointments set · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="42" style="background:var(--gg-warning)"></div><span class="progress-marker" style="left:61%"></span></div><p class="text-xs c-subtle mt-1">42% · expected 61%</p></td><td data-label="Gap" class="right num c-warning">−9</td><td data-actions class="right"><button class="btn btn-secondary btn-xs" data-toast="Coaching note started for Arthur Curry">Coach</button></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Wanda Maximoff"></span><div><p class="name">Wanda Maximoff</p><p class="sub">Avengers</p></div></div></td><td data-label="Goal">Appointments set · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="38" style="background:var(--gg-warning)"></div><span class="progress-marker" style="left:61%"></span></div><p class="text-xs c-subtle mt-1">38% · expected 61%</p></td><td data-label="Gap" class="right num c-warning">−10</td><td data-actions class="right"><button class="btn btn-secondary btn-xs" data-toast="Coaching note started for Wanda Maximoff">Coach</button></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Sam Wilson"></span><div><p class="name">Sam Wilson</p><p class="sub">Avengers</p></div></div></td><td data-label="Goal">Calls · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="64" style="background:var(--gg-warning)"></div><span class="progress-marker" style="left:61%"></span></div><p class="text-xs c-subtle mt-1">64% · no calls since Monday</p></td><td data-label="Gap" class="right num c-warning">−3 days</td><td data-actions class="right"><button class="btn btn-secondary btn-xs" data-toast="Coaching note started for Sam Wilson">Coach</button></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Troy Glaus"></span><div><p class="name">Troy Glaus</p><p class="sub">Halo Crew</p></div></div></td><td data-label="Goal">Deals closed · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="50" style="background:var(--gg-warning)"></div><span class="progress-marker" style="left:61%"></span></div><p class="text-xs c-subtle mt-1">50% · expected 61%</p></td><td data-label="Gap" class="right num c-warning">−2</td><td data-actions class="right"><button class="btn btn-secondary btn-xs" data-toast="Coaching note started for Troy Glaus">Coach</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <div class="grid-2 mt-6">
+        <section class="card" id="track-record">
+          <div class="row-between"><h2 class="text-h3">Track record</h2><span class="text-xs c-subtle">Revenue goal · last 6 months</span></div>
+          <ul class="stack-3 mt-4 track-list">
+            <li><span data-avatar="Shohei Ohtani" class="xs"></span><span class="grow text-sm truncate">Shohei Ohtani</span><span class="track"><i class="hit"></i><i class="hit"></i><i class="hit"></i><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="num text-sm c-success">6/6</span></li>
+            <li><span data-avatar="Mike Trout" class="xs"></span><span class="grow text-sm truncate">Mike Trout</span><span class="track"><i class="hit"></i><i class="hit"></i><i class="miss"></i><i class="hit"></i><i class="hit"></i><i class="hit"></i></span><span class="num text-sm c-success">5/6</span></li>
+            <li><span data-avatar="Peter Parker" class="xs"></span><span class="grow text-sm truncate">Peter Parker</span><span class="track"><i class="miss"></i><i class="hit"></i><i class="hit"></i><i class="miss"></i><i class="hit"></i><i class="hit"></i></span><span class="num text-sm">4/6</span></li>
+            <li><span data-avatar="Hal Jordan" class="xs"></span><span class="grow text-sm truncate">Hal Jordan</span><span class="track"><i class="hit"></i><i class="miss"></i><i class="hit"></i><i class="miss"></i><i class="miss"></i><i class="hit"></i></span><span class="num text-sm">3/6</span></li>
+            <li><span data-avatar="Billy Batson" class="xs"></span><span class="grow text-sm truncate">Billy Batson</span><span class="track"><i class="miss"></i><i class="miss"></i><i class="hit"></i><i class="miss"></i><i class="miss"></i><i class="miss"></i></span><span class="num text-sm c-warning">1/6</span></li>
+          </ul>
+          <p class="text-xs c-subtle mt-4"><span class="track-key hit"></span> hit &nbsp; <span class="track-key miss"></span> missed — shape and colour, so it reads without colour too.</p>
+        </section>
+
+        <section class="card" id="schedules">
+          <h2 class="text-h3">Sent on a schedule</h2>
+          <p class="text-sm c-muted mt-1">The same answers, in managers’ inboxes before they ask.</p>
+          <ul class="stack-4 mt-4">
+            <li class="row"><span class="sched-ico"><i data-icon="mail" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Weekly coaching digest</p><p class="text-xs c-subtle">Mondays 8:00 AM · to every manager · their team only</p></div><button class="toggle" aria-checked="true" aria-label="Weekly coaching digest" data-toast="Schedule updated"></button></li>
+            <li class="row"><span class="sched-ico"><i data-icon="mail" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Month-end results</p><p class="text-xs c-subtle">1st of the month · to Tony Stark, Pepper Potts</p></div><button class="toggle" aria-checked="true" aria-label="Month-end results" data-toast="Schedule updated"></button></li>
+            <li class="row"><span class="sched-ico"><i data-icon="mail" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Daily leaderboard snapshot</p><p class="text-xs c-subtle">Weekdays 5:30 PM · to Avengers</p></div><button class="toggle" aria-checked="false" aria-label="Daily leaderboard snapshot" data-toast="Schedule updated"></button></li>
+          </ul>
+        </section>
+      </div>
+
+    </div>
+  </main>
+
+  <template id="guide">
+    <p class="intro">Not a BI tool — Reporting answers one question for managers: who needs a conversation this week, and about what.</p>
+    <div class="who"><span class="pill brand">Managers</span><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#report-kpis" data-title="The headline">
+        <p>How many goals are running, how many are on track, and how that compares to last month.</p>
+      </li>
+      <li data-target="#at-risk" data-title="Behind pace, worst first">
+        <p>Everyone behind where they should be by today, sorted by the gap, with a one-click coaching note. Managers only ever see their own team.</p>
+      </li>
+      <li data-target="#track-record" data-title="Track record">
+        <p>One bad month or a pattern? Six months of hit-or-miss at a glance.</p>
+      </li>
+      <li data-target="#schedules" data-title="Delivered on a schedule">
+        <p>Coaching digests and month-end results arrive by email, sent through your own mail server.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

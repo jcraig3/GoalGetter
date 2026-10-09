@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Home · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: the Home dashboard.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="home">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header" id="home-header">
+        <div>
+          <h1 class="text-h1">Welcome back, Peter</h1>
+          <p>Where things stand today.</p>
+        </div>
+      </div>
+
+      <ul class="mb-6 stack-2 need-manager" id="banner">
+        <li class="banner">
+          <a href="integrations.html">
+            <span class="grow">Nothing has arrived from <strong>Phone system</strong> since Tuesday — call counts may be behind.</span>
+            <span aria-hidden="true">→</span>
+          </a>
+          <button type="button" aria-label="Not now" title="Put away until it changes, or until tomorrow" data-toast="Put away until it changes, or tomorrow"><i data-icon="close"></i></button>
+        </li>
+      </ul>
+
+      <div class="grid-2">
+        <section class="card" id="placements">
+          <div class="row-between">
+            <h2 class="text-h3">Where you stand</h2>
+            <a href="leaderboards.html" class="link">All boards</a>
+          </div>
+          <ul class="mt-4 stack-3">
+            <li class="row" style="gap:1rem">
+              <span class="text-2xl font-semibold num c-bronze" style="width:3rem">3</span>
+              <div class="grow">
+                <a href="leaderboards.html?board=calls" class="text-sm c-content truncate" style="display:block">Calls · October</a>
+                <p class="text-xs c-subtle truncate">of 26 · October</p>
+              </div>
+              <span class="text-xs c-success num" title="Up 2 since last period">▲ 2</span>
+              <div class="shrink-0" style="width:5rem" data-spark="40,88,130,190,240,301,355,412" data-label="Calls over October"></div>
+              <span class="text-sm c-muted num shrink-0">412</span>
+            </li>
+            <li class="row" style="gap:1rem">
+              <span class="text-2xl font-semibold num c-muted" style="width:3rem">4</span>
+              <div class="grow">
+                <a href="leaderboards.html?board=appts" class="text-sm c-content truncate" style="display:block">Appointments set · October</a>
+                <p class="text-xs c-subtle truncate">of 26 · October</p>
+              </div>
+              <span class="text-xs c-success num" title="Up 1 since last period">▲ 1</span>
+              <div class="shrink-0" style="width:5rem" data-spark="3,6,10,14,17,22,27,31" data-label="Appointments over October"></div>
+              <span class="text-sm c-muted num shrink-0">31</span>
+            </li>
+            <li class="row" style="gap:1rem">
+              <span class="text-2xl font-semibold num c-muted" style="width:3rem">9</span>
+              <div class="grow">
+                <a href="leaderboards.html?board=deals" class="text-sm c-content truncate" style="display:block">Deals closed · October</a>
+                <p class="text-xs c-subtle truncate">of 26 · October</p>
+              </div>
+              <div class="shrink-0" style="width:5rem" data-spark="1,2,4,5,8,10,12,14" data-label="Deals over October"></div>
+              <span class="text-sm c-muted num shrink-0">14</span>
+            </li>
+            <li class="row" style="gap:1rem">
+              <span class="text-2xl font-semibold num c-muted" style="width:3rem">12</span>
+              <div class="grow">
+                <a href="leaderboards.html?board=revenue" class="text-sm c-content truncate" style="display:block">Revenue · October</a>
+                <p class="text-xs c-subtle truncate">of 26 · October</p>
+              </div>
+              <span class="text-xs c-danger num" title="Down 1 since last period">▼ 1</span>
+              <div class="shrink-0" style="width:5rem" data-spark="3200,9100,15800,22400,29000,36100,41900,48250" data-label="Revenue over October"></div>
+              <span class="text-sm c-muted num shrink-0">$48,250</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card" id="my-goals">
+          <div class="row-between">
+            <h2 class="text-h3">Your goals</h2>
+            <a href="goals.html" class="link">All goals</a>
+          </div>
+          <ul class="mt-5 stack-5">
+            <li>
+              <p class="text-sm c-content mb-1" style="margin-bottom:.25rem"><a href="goals.html">Monthly revenue</a><span class="c-subtle"> · October</span></p>
+              <div class="row-between text-sm">
+                <span class="truncate">$48,250<span class="c-muted"> of </span>$60,000</span>
+                <span class="num c-muted">80%</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Revenue progress">
+                <div class="progress-fill" data-w="80"></div>
+                <span class="progress-marker" style="left:61%" title="Expected by today: 61%"></span>
+              </div>
+              <p class="goal-meta"><span class="pill success">Ahead</span><span>12 days left</span><span>· needs $11,750 more</span><span>· on pace for $79,100</span><span>· <span class="marker-legend"></span> expected by today</span></p>
+            </li>
+            <li>
+              <p class="text-sm c-content" style="margin-bottom:.25rem"><a href="goals.html">Calls</a><span class="c-subtle"> · October</span></p>
+              <div class="row-between text-sm">
+                <span class="truncate">412<span class="c-muted"> of </span>400</span>
+                <span class="num c-success">103%</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="103" aria-valuemin="0" aria-valuemax="100" aria-label="Calls progress">
+                <div class="progress-fill hit" data-w="100"></div>
+              </div>
+              <ul class="row wrap mt-2" style="gap:.375rem" aria-label="Stretch levels">
+                <li class="pill success">✓ Target · 400</li>
+                <li class="pill">Stretch · 450</li>
+                <li class="pill">Legend · 520</li>
+              </ul>
+              <p class="goal-meta"><span class="pill success">Hit</span><span>12 days left</span></p>
+            </li>
+            <li>
+              <p class="text-sm c-content" style="margin-bottom:.25rem"><a href="goals.html">Appointments set</a><span class="c-subtle"> · October</span></p>
+              <div class="row-between text-sm">
+                <span class="truncate">31<span class="c-muted"> of </span>45</span>
+                <span class="num c-muted">69%</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100" aria-label="Appointments progress">
+                <div class="progress-fill" data-w="69"></div>
+                <span class="progress-marker" style="left:61%"></span>
+              </div>
+              <p class="goal-meta"><span class="pill">On track</span><span>12 days left</span><span>· needs 14 more</span><span>· on pace for 51</span></p>
+            </li>
+            <li>
+              <p class="text-sm c-content" style="margin-bottom:.25rem"><a href="goals.html">Deals closed</a><span class="c-subtle"> · Avengers</span></p>
+              <div class="row-between text-sm">
+                <span class="truncate">52<span class="c-muted"> of </span>100</span>
+                <span class="num c-muted">52%</span>
+              </div>
+              <div class="progress" role="progressbar" aria-valuenow="52" aria-valuemin="0" aria-valuemax="100" aria-label="Team deals progress">
+                <div class="progress-fill" data-w="52"></div>
+                <span class="progress-marker" style="left:61%"></span>
+              </div>
+              <p class="goal-meta"><span class="pill warning">Behind</span><span>12 days left</span><span>· needs 48 more</span><span>· on pace for 85</span></p>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <div class="grid-2 mt-6">
+        <section class="card" id="my-comps">
+          <div class="row-between">
+            <h2 class="text-h3">Your competitions</h2>
+            <a href="competitions.html" class="link">All competitions</a>
+          </div>
+          <ul class="mt-4 stack-4">
+            <li class="row" style="align-items:flex-start;gap:1rem">
+              <span class="mark" style="background:#7c3aed;width:36px;height:36px;border-radius:8px"><i data-icon="flag" class="sm"></i></span>
+              <div class="grow">
+                <a href="competitions.html" class="c-content">Fall Classic</a>
+                <p class="text-xs c-subtle">Revenue · everyone · ends in <span class="num" data-ends-in="54.2"></span></p>
+                <p class="text-sm mt-2">You are <strong class="c-content">4th</strong> <span class="c-muted">of 26 — $3,150 behind Clark Kent for 3rd</span></p>
+              </div>
+              <span class="pill success">Live</span>
+            </li>
+            <li class="row" style="align-items:flex-start;gap:1rem">
+              <span class="mark" style="background:#b91c1c;width:36px;height:36px;border-radius:8px">AVG</span>
+              <div class="grow">
+                <a href="competitions.html" class="c-content">Avengers vs. Justice League</a>
+                <p class="text-xs c-subtle">Deals closed · team against team · ends in <span class="num" data-ends-in="8.75"></span></p>
+                <p class="text-sm mt-2"><strong class="c-content">Avengers lead</strong> <span class="c-muted num">52 – 49</span></p>
+              </div>
+              <span class="pill success">Live</span>
+            </li>
+            <li class="row" style="align-items:flex-start;gap:1rem">
+              <span class="mark" style="background:#0e7490;width:36px;height:36px;border-radius:8px"><i data-icon="flag" class="sm"></i></span>
+              <div class="grow">
+                <a href="competitions.html" class="c-content">Halloween Call Blitz</a>
+                <p class="text-xs c-subtle">Calls · starts Oct 27</p>
+              </div>
+              <span class="pill">Upcoming</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="card need-manager" id="attention">
+          <div class="row-between">
+            <h2 class="text-h3">Who needs a nudge</h2>
+            <a href="reporting.html" class="link">Reporting</a>
+          </div>
+          <ul class="mt-4 stack-3">
+            <li class="row">
+              <span data-avatar="Sam Wilson"></span>
+              <div class="grow">
+                <p class="text-sm c-content">Sam Wilson</p>
+                <p class="text-xs c-subtle">No calls since Monday · 2 goals behind</p>
+              </div>
+              <button class="btn btn-secondary btn-xs" data-toast="Recognition draft opened for Sam Wilson">Check in</button>
+            </li>
+            <li class="row">
+              <span data-avatar="Wanda Maximoff"></span>
+              <div class="grow">
+                <p class="text-sm c-content">Wanda Maximoff</p>
+                <p class="text-xs c-subtle">Appointments 38% · expected 61% by today</p>
+              </div>
+              <button class="btn btn-secondary btn-xs" data-toast="Noted — reminder set for Friday">Check in</button>
+            </li>
+          </ul>
+          <h3 class="text-caption uppercase c-subtle mt-5">Earned a word</h3>
+          <ul class="mt-2 stack-3">
+            <li class="row">
+              <span data-avatar="Natasha Romanoff"></span>
+              <div class="grow">
+                <p class="text-sm c-content">Natasha Romanoff</p>
+                <p class="text-xs c-subtle">Hit Revenue · October with 12 days to spare</p>
+              </div>
+              <button class="btn btn-secondary btn-xs" data-toast="Recognition sent to Natasha Romanoff">Recognise</button>
+            </li>
+          </ul>
+        </section>
+      </div>
+
+      <section class="card mt-6 need-admin" id="health">
+        <div class="row-between">
+          <h2 class="text-h3">Data health</h2>
+          <a href="integrations.html" class="link">Integrations</a>
+        </div>
+        <ul class="mt-4 grid-3">
+          <li class="row" style="gap:.75rem">
+            <span class="dot warning"></span>
+            <div class="grow"><p class="text-sm c-content">Phone system</p><p class="text-xs c-subtle">Webhook · last row 2 days ago</p></div>
+            <span class="pill warning">Stale</span>
+          </li>
+          <li class="row" style="gap:.75rem">
+            <span class="dot success"></span>
+            <div class="grow"><p class="text-sm c-content">Sales tracker</p><p class="text-xs c-subtle">Google Sheets · 4 min ago</p></div>
+            <span class="pill success">Healthy</span>
+          </li>
+          <li class="row" style="gap:.75rem">
+            <span class="dot success"></span>
+            <div class="grow"><p class="text-sm c-content">Company directory</p><p class="text-xs c-subtle">Microsoft 365 · 1 h ago</p></div>
+            <span class="pill success">Healthy</span>
+          </li>
+        </ul>
+      </section>
+
+    </div>
+  </main>
+
+  <template id="guide">
+    <p class="intro">Home is the page everyone opens first. It is arranged by what <em>you</em> can act on — so an agent, a manager and an admin each see a different page. Try the <strong>View as</strong> switch in the tour bar.</p>
+    <div class="who"><span class="pill brand">Agents</span><span class="pill brand">Managers</span><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#home-header" data-title="A greeting, then the facts">
+        <p>No cluttered dashboard of widgets. Peter sees where he stands, his goals and his contests — in that order.</p>
+      </li>
+      <li data-target="#banner" data-title="Only when something is wrong">
+        <p>Warnings appear only when there is something to act on, and can be put away until they change. A permanent “all good” panel trains people to stop looking.</p>
+      </li>
+      <li data-target="#placements" data-title="Where you stand">
+        <p>Your rank on every board, large, in gold, silver or bronze for the podium. Movement is an arrow <em>and</em> a number, never colour alone.</p>
+        <p>The sparkline shows how you got there — a steady climb and one big day look identical as a single number.</p>
+      </li>
+      <li data-target="#my-goals" data-title="Goals, with pace">
+        <p>The thin line on each bar is where you <em>should</em> be by today. 40% on the 3rd and 40% on the 28th are opposite situations; the marker tells them apart.</p>
+        <p>Beat the target and stretch levels light up past it.</p>
+      </li>
+      <li data-target="#my-comps" data-title="Contests with deadlines">
+        <p>Competitions sit above the boards because they have a clock. The countdown is live — watch it tick.</p>
+      </li>
+      <li data-target="#attention" data-title="Who needs a nudge (managers)">
+        <p>Managers get the people who are slipping, and the people who have earned a word — with one click to act on either.</p>
+      </li>
+      <li data-target="#health" data-title="Is the data arriving? (admins)">
+        <p>Admins also see whether every data source is still sending. A leaderboard nobody trusts is worthless, so staleness is said out loud.</p>
+      </li>
+      <li data-target=".search-btn" data-title="Jump anywhere">
+        <p>Press <strong>Ctrl K</strong> (⌘K on a Mac) from any page to jump to a person, a board, a goal or a page by name. Try it now.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

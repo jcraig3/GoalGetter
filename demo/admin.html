@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin &amp; Settings · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: settings, appearance, inbox and assets.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/wall.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="admin">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent for-manager">These pages are for admins — shown here so you can explore them.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Organization</h1>
+          <p>Who your organization is, how it looks, and what needs an admin.</p>
+        </div>
+      </div>
+
+      <div class="tabs" role="group" aria-label="Section" id="admin-tabs">
+        <button class="tab" data-tab-group="admin" data-tab="settings" aria-pressed="true">Settings</button>
+        <button class="tab" data-tab-group="admin" data-tab="appearance" aria-pressed="false" id="tab-appearance">Appearance</button>
+        <button class="tab" data-tab-group="admin" data-tab="inbox" aria-pressed="false">Inbox <span class="count" id="inbox-tab-count">3</span></button>
+        <button class="tab" data-tab-group="admin" data-tab="assets" aria-pressed="false">Assets</button>
+      </div>
+
+      <!-- Settings -->
+      <div data-panel-group="admin" data-panel="settings">
+        <div class="grid-2">
+          <section class="card" id="org-settings">
+            <h2 class="text-h3">Company</h2>
+            <p class="text-sm c-muted mt-1">Who your organization is, and how it measures time and money.</p>
+            <form class="stack-4 mt-4" data-toast="Settings saved">
+              <div class="field"><label for="s-name">Name</label><input class="input" id="s-name" value="Stark Industries"></div>
+              <div class="filters" style="--cols:2;margin:0">
+                <div class="field"><label for="s-tz">Default time zone</label><select class="select" id="s-tz"><option>America/New_York</option><option>America/Chicago</option><option>America/Los_Angeles</option></select></div>
+                <div class="field"><label for="s-cur">Currency</label><select class="select" id="s-cur"><option>US dollar ($)</option><option>Euro (€)</option><option>Pound (£)</option></select></div>
+                <div class="field"><label for="s-week">Week starts</label><select class="select" id="s-week"><option>Monday</option><option>Sunday</option></select></div>
+                <div class="field"><label for="s-fy">Fiscal year starts</label><select class="select" id="s-fy"><option>January</option><option>April</option><option>July</option><option>October</option></select></div>
+              </div>
+              <div class="row" style="justify-content:flex-end"><button class="btn btn-primary" type="submit">Save</button></div>
+            </form>
+          </section>
+
+          <section class="card" id="security">
+            <h2 class="text-h3">Sign-in &amp; security</h2>
+            <p class="text-sm c-muted mt-1">How people get in, and how sure you are it is them.</p>
+            <ul class="stack-4 mt-4">
+              <li class="row"><div class="grow"><p class="text-sm c-content">Sign in with Microsoft</p><p class="text-xs c-subtle">Single sign-on for everyone in the directory</p></div><button class="toggle" aria-checked="true" aria-label="Sign in with Microsoft" data-toast="Single sign-on updated"></button></li>
+              <li class="row"><div class="grow"><p class="text-sm c-content">Two-step sign-in for admins</p><p class="text-xs c-subtle">An authenticator app code at every sign-in</p></div><button class="toggle" aria-checked="true" aria-label="Two-step for admins" data-toast="Two-step setting updated"></button></li>
+              <li class="row"><div class="grow"><p class="text-sm c-content">Profiles are public</p><p class="text-xs c-subtle">Badges and wins are visible; numbers stay private</p></div><button class="toggle" aria-checked="true" aria-label="Public profiles" data-toast="Profile visibility updated"></button></li>
+              <li class="row"><div class="grow"><p class="text-sm c-content">Audit log</p><p class="text-xs c-subtle">Every change, who made it, when — exportable</p></div><button class="btn btn-secondary btn-xs" data-toast="Downloaded audit-log.csv">Export</button></li>
+            </ul>
+          </section>
+        </div>
+
+        <section class="mt-6" id="roles">
+          <div class="row-between mb-4"><h2 class="text-h3">Roles</h2><button class="btn btn-secondary btn-xs" data-toast="Custom role: start from a built-in one and adjust">New custom role</button></div>
+          <div class="table-wrap">
+            <table class="gg gg-stack">
+              <thead><tr><th>Role</th><th>Sees</th><th>Can</th><th class="right">People</th></tr></thead>
+              <tbody>
+                <tr><td data-primary><span class="pill brand">Admin</span></td><td data-label="Sees">Everything</td><td data-label="Can">Connect data, manage people, run the TVs, change settings</td><td data-label="People" class="right num">2</td></tr>
+                <tr><td data-primary><span class="pill">Manager</span></td><td data-label="Sees">Their own team</td><td data-label="Can">Set goals, run competitions, correct numbers, see reporting</td><td data-label="People" class="right num">5</td></tr>
+                <tr><td data-primary><span class="pill">Agent</span></td><td data-label="Sees">Their own numbers and public boards</td><td data-label="Can">Recognise colleagues, react, follow their goals</td><td data-label="People" class="right num">26</td></tr>
+                <tr><td data-primary><span class="pill">Team lead <span class="c-subtle">custom</span></span></td><td data-label="Sees">Their own team</td><td data-label="Can">Everything an agent can, plus send TV announcements</td><td data-label="People" class="right num">0</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+
+      <!-- Appearance -->
+      <div data-panel-group="admin" data-panel="appearance" hidden>
+        <div class="appearance-grid">
+          <div class="stack-6">
+            <section class="card" id="brand-colors">
+              <h2 class="text-h3">Brand</h2>
+              <p class="text-sm c-muted mt-1">Your mark and colours. Click one — the whole app re-themes instantly.</p>
+              <div class="row mt-4" style="gap:.75rem">
+                <span class="org-logo" style="height:36px;font-size:12px"><span class="arc"></span>Stark</span>
+                <button class="btn btn-secondary btn-xs" data-toast="Logo upload: SVG or PNG, shown beside GoalGetter and on every TV">Change logo</button>
+              </div>
+              <p class="label text-sm c-muted mt-4">Brand colour</p>
+              <div class="swatches mt-2">
+                <button class="swatch lg" style="background:#6366f1" aria-label="Indigo" aria-pressed="true" data-brand="#6366f1,#818cf8,#1e2140"></button>
+                <button class="swatch lg" style="background:#dc2626" aria-label="Stark red" aria-pressed="false" data-brand="#dc2626,#ef4444,#2a1416"></button>
+                <button class="swatch lg" style="background:#d97706" aria-label="Gold" aria-pressed="false" data-brand="#d97706,#f59e0b,#2a2010"></button>
+                <button class="swatch lg" style="background:#059669" aria-label="Emerald" aria-pressed="false" data-brand="#059669,#10b981,#0f2620"></button>
+                <button class="swatch lg" style="background:#0284c7" aria-label="Sky" aria-pressed="false" data-brand="#0284c7,#0ea5e9,#0f2130"></button>
+                <button class="swatch lg" style="background:#db2777" aria-label="Pink" aria-pressed="false" data-brand="#db2777,#ec4899,#2a1220"></button>
+                <button class="link" id="brand-reset" type="button" style="margin-left:.5rem">Reset</button>
+              </div>
+              <p class="hint">A dark brand colour is lightened automatically so it stays readable on the dark interface.</p>
+            </section>
+
+            <section class="card" id="wall-bg">
+              <h2 class="text-h3">Background</h2>
+              <p class="text-sm c-muted mt-1">What sits behind every wall screen. A channel or a single screen can override it.</p>
+              <div class="bg-grid mt-4">
+                <button class="bg-tile" aria-pressed="true" data-bg="radial-gradient(40% 40% at 30% 30%, rgba(99,102,241,.45), transparent 70%), radial-gradient(35% 35% at 70% 60%, rgba(52,211,153,.25), transparent 70%)" style="background:radial-gradient(60% 60% at 30% 30%,#4f46e5,transparent),radial-gradient(60% 60% at 70% 70%,#059669,transparent),#070a10"><span>Aurora</span></button>
+                <button class="bg-tile" aria-pressed="false" data-bg="radial-gradient(45% 45% at 30% 40%, rgba(220,38,38,.5), transparent 70%), radial-gradient(40% 40% at 70% 60%, rgba(245,158,11,.35), transparent 70%)" style="background:radial-gradient(60% 60% at 30% 40%,#b91c1c,transparent),radial-gradient(60% 60% at 70% 60%,#d97706,transparent),#070a10"><span>Arc reactor</span></button>
+                <button class="bg-tile" aria-pressed="false" data-bg="radial-gradient(45% 45% at 50% 30%, rgba(14,165,233,.45), transparent 70%), radial-gradient(40% 40% at 30% 80%, rgba(168,85,247,.35), transparent 70%)" style="background:radial-gradient(60% 60% at 50% 30%,#0284c7,transparent),radial-gradient(60% 60% at 30% 80%,#7c3aed,transparent),#070a10"><span>Night sky</span></button>
+                <button class="bg-tile" aria-pressed="false" data-bg="none" style="background:#070a10"><span>Plain</span></button>
+              </div>
+            </section>
+          </div>
+
+          <section class="card" id="appearance-preview">
+            <div class="row-between"><h2 class="text-h3">Preview</h2><span class="text-xs c-subtle">The real renderer, smaller</span></div>
+            <div class="stage mini mt-4" id="appearance-stage"></div>
+            <p class="text-xs c-subtle mt-3">Fonts, panel style, layout and celebration rules live here too — bundled with the build, so a wall with no internet still renders.</p>
+          </section>
+        </div>
+      </div>
+
+      <!-- Inbox -->
+      <div data-panel-group="admin" data-panel="inbox" hidden>
+        <p class="text-sm c-muted mb-4">What needs an admin, in one place. Fix it here and it is gone.</p>
+        <ul class="stack-3" id="inbox-list">
+          <li class="inbox-item">
+            <span class="inbox-ico warning"><i data-icon="plug" class="sm"></i></span>
+            <div class="grow"><p class="c-content">Phone system has not sent anything in 2 days</p><p class="text-xs c-subtle">Call counts on 2 boards and 9 goals may be behind.</p></div>
+            <a class="btn btn-secondary btn-xs" href="integrations.html">Check it</a>
+            <button class="btn btn-primary btn-xs" data-fix="Phone system re-synced — 3,407 rows read">Sync now</button>
+          </li>
+          <li class="inbox-item">
+            <span class="inbox-ico"><i data-icon="users" class="sm"></i></span>
+            <div class="grow"><p class="c-content">4 rows have an email nobody here has</p><p class="text-xs c-subtle">From Sales tracker — e.g. bruce.banner@stark.example</p></div>
+            <button class="btn btn-primary btn-xs" data-fix="Invited Bruce Banner — his 4 rows will count from now">Invite them</button>
+          </li>
+          <li class="inbox-item">
+            <span class="inbox-ico"><i data-icon="pencil" class="sm"></i></span>
+            <div class="grow"><p class="c-content">Kara Danvers asked to be shown as “Supergirl” on the TVs</p><p class="text-xs c-subtle">Nickname request · 1 hour ago</p></div>
+            <button class="btn btn-secondary btn-xs" data-fix="Declined — Kara has been told">Decline</button>
+            <button class="btn btn-primary btn-xs" data-fix="Approved — the TVs now say Supergirl">Approve</button>
+          </li>
+        </ul>
+        <div class="empty" id="inbox-empty" hidden>
+          <span class="empty-icon"><i data-icon="check"></i></span>
+          <h3 class="text-h3">All clear</h3>
+          <p>Nothing needs an admin right now. New items show a count in the sidebar.</p>
+        </div>
+      </div>
+
+      <!-- Assets -->
+      <div data-panel-group="admin" data-panel="assets" hidden>
+        <p class="text-sm c-muted mb-4">Your staff’s photos, and the library of pictures, video and sound your walls, badges and celebrations use — with where each one is used.</p>
+        <section class="card">
+          <div class="row-between"><h2 class="text-h3">Staff photos</h2><button class="btn btn-secondary btn-xs" data-toast="Bulk upload: drop a folder, matched to people by file name">Upload in bulk</button></div>
+          <div class="photo-grid mt-4" id="photo-grid">
+            <span data-avatar="Peter Parker" class="lg"></span><span data-avatar="Natasha Romanoff" class="lg"></span><span data-avatar="Clark Kent" class="lg"></span><span data-avatar="Bruce Wayne" class="lg"></span><span data-avatar="Mike Trout" class="lg"></span><span data-avatar="Shohei Ohtani" class="lg"></span><span data-avatar="LaDainian Tomlinson" class="lg"></span><span data-avatar="Philip Rivers" class="lg"></span><span data-avatar="Kara Danvers" class="lg"></span><span data-avatar="Wally West" class="lg"></span><span data-avatar="Carol Danvers" class="lg"></span><span data-avatar="Hal Jordan" class="lg"></span>
+          </div>
+        </section>
+        <div class="asset-grid mt-6">
+          <article class="asset"><div class="asset-art" style="background:radial-gradient(60% 60% at 30% 30%,#4f46e5,transparent),radial-gradient(60% 60% at 70% 70%,#059669,transparent),#070a10"></div><p class="text-sm c-content">Aurora</p><p class="text-xs c-subtle">Background · used by Sales floor</p></article>
+          <article class="asset"><div class="asset-art" style="background:linear-gradient(135deg,#312e81,#831843)"><span>🎬</span></div><p class="text-sm c-content">Q4 kickoff.mp4</p><p class="text-xs c-subtle">Video · 0:42 · used by Lobby</p></article>
+          <article class="asset"><div class="asset-art sound"><button class="play-sound" data-play-sound="fanfare" aria-label="Play Fanfare"><i data-icon="play"></i></button></div><p class="text-sm c-content">Fanfare</p><p class="text-xs c-subtle">Sound · goal celebrations</p></article>
+          <article class="asset"><div class="asset-art sound"><button class="play-sound" data-play-sound="ding" aria-label="Play Ding"><i data-icon="play"></i></button></div><p class="text-sm c-content">Ding</p><p class="text-xs c-subtle">Sound · overtakes</p></article>
+          <article class="asset"><div class="asset-art" style="background:linear-gradient(135deg,#7c2d12,#f59e0b)"><span>🏅</span></div><p class="text-sm c-content">Century badge</p><p class="text-xs c-subtle">Badge art · 4 people hold it</p></article>
+          <article class="asset"><div class="asset-art" style="background:linear-gradient(135deg,#064e3b,#0e7490)"><span>🖼️</span></div><p class="text-sm c-content">Welcome banner</p><p class="text-xs c-subtle">Picture · not used yet</p></article>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <template id="guide">
+    <p class="intro">Everything an admin looks after, in four tabs. In the app each is its own page in the sidebar’s Organization and Wall groups.</p>
+    <div class="who"><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#admin-tabs" data-title="Four places, one job">
+        <p>Settings, Appearance, Inbox and Assets. The sidebar links go straight to each tab.</p>
+      </li>
+      <li data-target="#org-settings" data-title="Company settings">
+        <p>Time zone, currency, week start and fiscal year — so “this week” and “this quarter” mean what your business means.</p>
+      </li>
+      <li data-target="#security" data-title="Sign-in and security">
+        <p>Microsoft single sign-on, two-step codes, private numbers on public profiles, and an exportable audit log of every change.</p>
+      </li>
+      <li data-target="#roles" data-title="Roles">
+        <p>Admin, manager and agent, plus custom roles built from the same permissions.</p>
+      </li>
+      <li data-target="#tab-appearance" data-title="Try Appearance and Inbox">
+        <p>Open <strong>Appearance</strong> and click a brand colour — the whole app re-themes live. Then open <strong>Inbox</strong> and fix things; the sidebar count goes down as you go.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

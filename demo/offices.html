@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Offices · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: offices.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="offices">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent for-manager">Only admins manage offices — it is shown here so you can explore it.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Offices</h1>
+          <p>Locations. Each office holds teams, and each team holds agents.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="office-modal">New office</button>
+        </div>
+      </div>
+
+      <div class="office-layout">
+        <ul class="office-cards" id="office-list">
+          <li class="card p-4 office-card">
+            <div class="row"><span class="office-icon"><i data-icon="building"></i></span><div class="grow"><h2 class="text-h3">Gotham</h2><p class="text-xs c-subtle">Eastern time · America/New_York</p></div><button class="icon-btn" aria-label="Edit Gotham" data-modal-open="office-modal"><i data-icon="pencil" class="sm"></i></button></div>
+            <div class="office-stats"><div><span class="num c-content">6</span> people</div><div><span class="num c-content">1</span> team</div><div><span class="num c-content">2</span> TVs</div></div>
+            <div class="row wrap mt-3" style="gap:.375rem"><span class="pill"><span class="mark" style="background:#b91c1c;width:14px;height:14px;font-size:6px;border-radius:3px">AVG</span> Avengers</span></div>
+          </li>
+          <li class="card p-4 office-card">
+            <div class="row"><span class="office-icon"><i data-icon="building"></i></span><div class="grow"><h2 class="text-h3">Metropolis</h2><p class="text-xs c-subtle">Central time · America/Chicago</p></div><button class="icon-btn" aria-label="Edit Metropolis" data-modal-open="office-modal"><i data-icon="pencil" class="sm"></i></button></div>
+            <div class="office-stats"><div><span class="num c-content">6</span> people</div><div><span class="num c-content">1</span> team</div><div><span class="num c-content">1</span> TV</div></div>
+            <div class="row wrap mt-3" style="gap:.375rem"><span class="pill"><span class="mark" style="background:#1d4ed8;width:14px;height:14px;font-size:6px;border-radius:3px">JL</span> Justice League</span></div>
+          </li>
+          <li class="card p-4 office-card" id="office-star">
+            <div class="row"><span class="office-icon"><i data-icon="building"></i></span><div class="grow"><h2 class="text-h3">Star City</h2><p class="text-xs c-subtle">Pacific time · America/Los_Angeles</p></div><button class="icon-btn" aria-label="Edit Star City" data-modal-open="office-modal"><i data-icon="pencil" class="sm"></i></button></div>
+            <div class="office-stats"><div><span class="num c-content">13</span> people</div><div><span class="num c-content">2</span> teams</div><div><span class="num c-content">3</span> TVs</div></div>
+            <div class="row wrap mt-3" style="gap:.375rem"><span class="pill"><span class="mark" style="background:#0e7490;width:14px;height:14px;font-size:6px;border-radius:3px">BLT</span> Bolt Squad</span><span class="pill"><span class="mark" style="background:#c2410c;width:14px;height:14px;font-size:6px;border-radius:3px">HLO</span> Halo Crew</span></div>
+          </li>
+          <li class="card p-4 office-card">
+            <div class="row"><span class="office-icon"><i data-icon="building"></i></span><div class="grow"><h2 class="text-h3">Central City</h2><p class="text-xs c-subtle">Mountain time · America/Denver</p></div><button class="icon-btn" aria-label="Edit Central City" data-modal-open="office-modal"><i data-icon="pencil" class="sm"></i></button></div>
+            <div class="office-stats"><div><span class="num c-content">6</span> people</div><div><span class="num c-content">1</span> team</div><div><span class="num c-content">1</span> TV</div></div>
+            <div class="row wrap mt-3" style="gap:.375rem"><span class="pill"><span class="mark" style="background:#7c3aed;width:14px;height:14px;font-size:6px;border-radius:3px">SPF</span> Speed Force</span></div>
+          </li>
+        </ul>
+
+        <aside class="card" id="office-board">
+          <div class="row-between"><h2 class="text-h3">Office revenue · October</h2><a class="link" href="leaderboards.html?board=offices">Open board</a></div>
+          <p class="text-xs c-subtle mt-1">Offices can be ranked like people — every board works at any level.</p>
+          <ol class="stack-4 mt-4" id="office-bars"></ol>
+        </aside>
+      </div>
+
+      <section class="card mt-6" id="office-tz">
+        <h2 class="text-h3">Local time, everywhere</h2>
+        <p class="text-sm c-muted mt-1">“Today” and “this week” follow each office’s clock, so a 9 AM start in Star City is not a 6 AM one.</p>
+        <div class="tz-row mt-4">
+          <div class="tz"><span class="text-xs c-subtle">Gotham</span><span class="num tz-time" data-tz="America/New_York"></span></div>
+          <div class="tz"><span class="text-xs c-subtle">Metropolis</span><span class="num tz-time" data-tz="America/Chicago"></span></div>
+          <div class="tz"><span class="text-xs c-subtle">Central City</span><span class="num tz-time" data-tz="America/Denver"></span></div>
+          <div class="tz"><span class="text-xs c-subtle">Star City</span><span class="num tz-time" data-tz="America/Los_Angeles"></span></div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="office-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="om-title">
+      <header>
+        <div><h2 class="text-h2" id="om-title">Office</h2><p>A location, with its own time zone.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Office saved" class="stack-4">
+        <div class="field"><label for="om-n">Name</label><input class="input" id="om-n" value="Coast City"></div>
+        <div class="field"><label for="om-tz">Time zone</label><select class="select" id="om-tz"><option>America/Los_Angeles</option><option>America/Denver</option><option>America/Chicago</option><option>America/New_York</option></select></div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Save</button></div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      function tick() {
+        document.querySelectorAll('[data-tz]').forEach(function (n) {
+          n.textContent = new Date().toLocaleTimeString('en-US', { timeZone: n.dataset.tz, hour: 'numeric', minute: '2-digit' });
+        });
+      }
+      tick();
+      setInterval(tick, 20000);
+    })();
+  </script>
+
+  <template id="guide">
+    <p class="intro">Offices are the top of the structure: an office holds teams, a team holds agents. Each office keeps its own clock.</p>
+    <div class="who"><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#office-star" data-title="An office at a glance">
+        <p>People, teams and TVs per location. Star City holds two teams — Bolt Squad and Halo Crew.</p>
+      </li>
+      <li data-target="#office-board" data-title="Office against office">
+        <p>Every board works at any level, so offices can be ranked against each other — great for a monthly Office Cup.</p>
+      </li>
+      <li data-target="#office-tz" data-title="Time zones done right">
+        <p>Daily goals and “today” leaderboards roll over at each office’s own midnight.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Users · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: users, roles and access.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="users">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent">Agents do not see this page — it is shown here so you can explore it. Switch <strong>View as</strong> back to Admin for the full picture.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Users</h1>
+          <p>Invite people and manage their access.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-secondary need-admin" data-toast="Import: a CSV of names and emails, or sync from Microsoft 365">Import</button>
+          <button class="btn btn-primary" data-modal-open="invite-modal" id="invite-btn">Invite people</button>
+        </div>
+      </div>
+
+      <div class="stat-row mb-6" id="user-stats">
+        <div class="stat"><p class="text-caption uppercase c-subtle">People</p><p class="stat-v num" data-count-to="33">33</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">Signed in this week</p><p class="stat-v num" data-count-to="29">29</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">Invited, not yet in</p><p class="stat-v num c-warning" data-count-to="2">2</p></div>
+        <div class="stat"><p class="text-caption uppercase c-subtle">Synced from directory</p><p class="stat-v num" data-count-to="31">31</p></div>
+      </div>
+
+      <div id="user-filters">
+        <div class="filters" style="--cols:4">
+          <div class="field"><label for="u-q">Search</label><input class="input" id="u-q" placeholder="Name or email"></div>
+          <div class="field"><label for="u-role">Role</label><select class="select" id="u-role"><option value="">Every role</option><option>Admin</option><option>Manager</option><option>Agent</option></select></div>
+          <div class="field"><label for="u-team">Team</label><select class="select" id="u-team"></select></div>
+          <div class="field"><label for="u-office">Office</label><select class="select" id="u-office"></select></div>
+        </div>
+        <div class="row-between mb-4" style="align-items:center">
+          <p class="text-sm c-muted" id="users-count"></p>
+          <button class="link" id="u-clear" type="button">Clear filters</button>
+        </div>
+      </div>
+
+      <div id="users-table">
+        <div class="table-wrap">
+          <table class="gg gg-stack">
+            <thead><tr><th>Name</th><th>Role</th><th>Team</th><th>Office</th><th>Status</th><th>Last seen</th><th class="right"><span class="sr-only">Actions</span></th></tr></thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="invite-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="im-title">
+      <header>
+        <div><h2 class="text-h2" id="im-title">Invite people</h2><p>Each gets an email with a link to set their password — or signs in with Microsoft if single sign-on is on.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="3 invitations sent" class="stack-4">
+        <div class="field"><label for="im-emails">Emails</label><textarea class="input" id="im-emails" rows="3">bruce.banner@stark.example
+scott.lang@stark.example
+hope.vandyne@stark.example</textarea><p class="hint">One per line, or separated by commas.</p></div>
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="im-role">Role</label><select class="select" id="im-role"><option>Agent</option><option>Manager</option><option>Admin</option><option>Team lead (custom)</option></select></div>
+          <div class="field"><label for="im-team">Team</label><select class="select" id="im-team"><option>Avengers</option><option>Justice League</option><option>Bolt Squad</option><option>Halo Crew</option><option>Speed Force</option></select></div>
+        </div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Send invitations</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">Everyone who can sign in, what they can do, and where they sit. Most organizations never type a name here — the directory syncs from Microsoft 365.</p>
+    <div class="who"><span class="pill brand">Admins</span><span class="pill brand">Managers (their team)</span></div>
+    <ol>
+      <li data-target="#user-stats" data-title="Who is actually using it">
+        <p>Who signed in this week, who has an invitation waiting, and who came from the directory sync.</p>
+      </li>
+      <li data-target="#user-filters" data-title="Find anyone fast">
+        <p>Filter by name, role, team or office. Try choosing <strong>Halo Crew</strong>, or typing <strong>Danvers</strong>.</p>
+      </li>
+      <li data-target="#users-table" data-title="Roles that mean something">
+        <p>Three built-in roles — admin, manager, agent — plus custom roles. Managers only ever see their own team, and the server enforces it rather than just hiding buttons.</p>
+        <p>On a phone this table becomes a stack of cards rather than scrolling sideways.</p>
+      </li>
+      <li data-target="#invite-btn" data-title="Invite in bulk">
+        <p>Paste a list of emails, pick a role and team, done. With single sign-on, people simply sign in with their work account.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

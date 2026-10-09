@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Competitions · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: time-boxed competitions.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="competitions">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Competitions</h1>
+          <p>Time-boxed contests between people or teams. A result is frozen when the contest settles, so a later correction to the underlying data cannot change who won.</p>
+        </div>
+        <div class="page-actions need-manager">
+          <button class="btn btn-primary" data-modal-open="comp-modal">New competition</button>
+        </div>
+      </div>
+
+      <div class="tabs" role="group" aria-label="Which competitions" id="comp-tabs">
+        <button class="tab" data-tab-group="comp" data-tab="live" aria-pressed="true">Live<span class="count">2</span></button>
+        <button class="tab" data-tab-group="comp" data-tab="upcoming" aria-pressed="false">Upcoming<span class="count">2</span></button>
+        <button class="tab" data-tab-group="comp" data-tab="finished" aria-pressed="false">Finished<span class="count">3</span></button>
+        <button class="tab need-manager" data-tab-group="comp" data-tab="drafts" aria-pressed="false">Drafts<span class="count">1</span></button>
+      </div>
+
+      <div data-panel-group="comp" data-panel="live">
+        <section class="card comp-feature" id="comp-race">
+          <div class="comp-head">
+            <span class="comp-icon" style="background:linear-gradient(135deg,#7c3aed,#ec4899)"><i data-icon="flag"></i></span>
+            <div class="grow">
+              <div class="row wrap" style="gap:.5rem"><h2 class="text-h2">Fall Classic</h2><span class="pill success"><span class="dot success" style="width:6px;height:6px;box-shadow:none"></span> Live</span></div>
+              <p class="text-sm c-muted mt-1">Most revenue · everyone · Oct 1 – Oct 31 · created by Steve Rogers</p>
+            </div>
+            <div class="countdown" id="countdown">
+              <p class="text-caption uppercase c-subtle">Ends in</p>
+              <p class="num countdown-value" data-ends-in="54.2"></p>
+            </div>
+          </div>
+
+          <div class="comp-body">
+            <ol class="race-list" id="race-lanes" aria-label="Standings"></ol>
+            <aside class="prize-box" id="prize">
+              <p class="text-caption uppercase c-subtle">Prizes</p>
+              <ul class="stack-3 mt-3">
+                <li class="row"><span class="medal gold">1</span><div><p class="text-sm c-content">Pick next Friday’s team lunch</p><p class="text-xs c-subtle">+ 500 points</p></div></li>
+                <li class="row"><span class="medal silver">2</span><div><p class="text-sm c-content">Reserved parking spot for a month</p><p class="text-xs c-subtle">+ 300 points</p></div></li>
+                <li class="row"><span class="medal bronze">3</span><div><p class="text-sm c-content">Spin the prize wheel</p><p class="text-xs c-subtle">+ 150 points</p></div></li>
+              </ul>
+              <div class="rounds mt-5">
+                <p class="text-caption uppercase c-subtle">Rounds</p>
+                <div class="round-strip mt-2">
+                  <span class="done" title="Week 1 — won by Shohei Ohtani">W1</span>
+                  <span class="done" title="Week 2 — won by LaDainian Tomlinson">W2</span>
+                  <span class="now" title="Week 3 — running">W3</span>
+                  <span>W4</span>
+                  <span>W5</span>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="card mt-6" id="comp-h2h">
+          <div class="row-between wrap">
+            <div>
+              <div class="row" style="gap:.5rem"><h2 class="text-h3">Avengers vs. Justice League</h2><span class="pill success">Live</span></div>
+              <p class="text-sm c-muted mt-1">Deals closed · team against team · ends in <span class="num" data-ends-in="8.75"></span></p>
+            </div>
+            <button class="btn btn-secondary btn-xs need-admin" data-toast="Showing on the Sales floor channel now">Show on TV</button>
+          </div>
+          <div class="h2h-row mt-5">
+            <div class="h2h-side"><span class="mark" style="background:#b91c1c;width:48px;height:48px;font-size:14px;border-radius:10px">AVG</span><div><p class="c-content font-medium">Avengers</p><p class="text-xs c-subtle">Gotham · 5 agents</p></div><span class="h2h-score num">52</span></div>
+            <span class="c-subtle text-sm font-semibold">VS</span>
+            <div class="h2h-side right"><span class="h2h-score num">49</span><div><p class="c-content font-medium">Justice League</p><p class="text-xs c-subtle">Metropolis · 5 agents</p></div><span class="mark" style="background:#1d4ed8;width:48px;height:48px;font-size:14px;border-radius:10px">JL</span></div>
+          </div>
+          <div class="split-bar mt-4" aria-hidden="true"><span style="flex-grow:52;background:#b91c1c"></span><span style="flex-grow:49;background:#1d4ed8"></span></div>
+          <p class="text-xs c-subtle mt-2">Top closers today: Natasha Romanoff (4) · Bruce Wayne (3) · Carol Danvers (3)</p>
+        </section>
+      </div>
+
+      <div data-panel-group="comp" data-panel="upcoming" hidden>
+        <div class="grid-2">
+          <article class="card">
+            <div class="row-between"><h3 class="text-h3">Halloween Call Blitz</h3><span class="pill">Upcoming</span></div>
+            <p class="text-sm c-muted mt-1">First to 500 calls · everyone · Oct 27 – Oct 31</p>
+            <p class="text-xs c-subtle mt-3">Starts in <span class="num" data-ends-in="420"></span> · 26 entrants · announced on the TVs at the start</p>
+          </article>
+          <article class="card">
+            <div class="row-between"><h3 class="text-h3">Office Cup: Star City vs. Gotham</h3><span class="pill">Upcoming</span></div>
+            <p class="text-sm c-muted mt-1">Revenue · office against office · November</p>
+            <p class="text-xs c-subtle mt-3">Starts Nov 1 · 2 offices · repeats every month</p>
+          </article>
+        </div>
+      </div>
+
+      <div data-panel-group="comp" data-panel="finished" hidden>
+        <ul class="list-card">
+          <li class="row wrap"><span class="medal gold">1</span><div class="grow"><p class="c-content">Summer Sprint</p><p class="text-xs c-subtle">Revenue · Aug 1 – Sep 30 · settled and frozen</p></div><span class="row text-sm" style="gap:.5rem"><span data-avatar="Mike Trout" class="xs"></span>Mike Trout won · $142,800</span></li>
+          <li class="row wrap"><span class="medal gold">1</span><div class="grow"><p class="c-content">Bolt Squad vs. Halo Crew</p><p class="text-xs c-subtle">Deals closed · Sep 15 – Sep 19 · settled and frozen</p></div><span class="row text-sm" style="gap:.5rem"><span class="mark" style="background:#0e7490;width:20px;height:20px;font-size:8px">BLT</span>Bolt Squad won · 61 – 58</span></li>
+          <li class="row wrap"><span class="medal gold">1</span><div class="grow"><p class="c-content">Back-to-School Dials</p><p class="text-xs c-subtle">Calls · Sep 1 – Sep 5 · settled and frozen</p></div><span class="row text-sm" style="gap:.5rem"><span data-avatar="Wally West" class="xs"></span>Wally West won · 512 calls</span></li>
+        </ul>
+      </div>
+
+      <div data-panel-group="comp" data-panel="drafts" hidden>
+        <ul class="list-card">
+          <li class="row wrap"><div class="grow"><p class="c-content">Holiday Closer Cup</p><p class="text-xs c-subtle">Deals closed · teams · Dec 1 – Dec 19 · not started</p></div><button class="btn btn-secondary btn-xs" data-toast="Scheduled — it starts Dec 1 and announces itself on the TVs">Schedule</button></li>
+        </ul>
+      </div>
+
+      <section class="mt-6 need-manager" id="templates">
+        <h2 class="text-h3">Start from a template</h2>
+        <div class="tpl-grid mt-3">
+          <button class="tpl" data-modal-open="comp-modal"><span class="tpl-icon">🏁</span><span><strong>Race to a number</strong><br><span class="c-subtle text-xs">First to 500 calls wins</span></span></button>
+          <button class="tpl" data-modal-open="comp-modal"><span class="tpl-icon">⚔️</span><span><strong>Head-to-head</strong><br><span class="c-subtle text-xs">Two people, one week</span></span></button>
+          <button class="tpl" data-modal-open="comp-modal"><span class="tpl-icon">🛡️</span><span><strong>Team against team</strong><br><span class="c-subtle text-xs">Squads, summed</span></span></button>
+          <button class="tpl" data-modal-open="comp-modal"><span class="tpl-icon">🏆</span><span><strong>Most in a window</strong><br><span class="c-subtle text-xs">Highest total by Friday</span></span></button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="comp-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cm-title">
+      <header>
+        <div><h2 class="text-h2" id="cm-title">New competition</h2><p>Its rules and entrants are locked once it starts.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Competition scheduled — it will announce itself on the TVs" class="stack-4">
+        <div class="field"><label for="cm-name">Name</label><input class="input" id="cm-name" value="Friday Power Hour"></div>
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="cm-type">Format</label><select class="select" id="cm-type"><option>Most in a window</option><option>Race to a number</option><option>Head-to-head</option><option>Team against team</option></select></div>
+          <div class="field"><label for="cm-metric">Metric</label><select class="select" id="cm-metric"><option>Calls</option><option>Revenue</option><option>Deals closed</option></select></div>
+          <div class="field"><label for="cm-start">Starts</label><input class="input" id="cm-start" value="Fri, 3:00 PM"></div>
+          <div class="field"><label for="cm-end">Ends</label><input class="input" id="cm-end" value="Fri, 4:00 PM"></div>
+        </div>
+        <div class="field"><label for="cm-prize">Prize</label><input class="input" id="cm-prize" value="Winner leaves early on Monday"></div>
+        <div class="row-between"><span class="text-sm c-muted">Show it on the TVs while it runs</span><button type="button" class="toggle" aria-checked="true" aria-label="Show on TVs"></button></div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Schedule</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">Competitions turn a normal week into a game: a clear start, a clear finish, a prize, and a result nobody can quietly change afterwards.</p>
+    <div class="who"><span class="pill brand">Everyone plays</span><span class="pill brand">Managers run them</span></div>
+    <ol>
+      <li data-target="#comp-tabs" data-title="Live, upcoming, finished">
+        <p>Contests move through their life on their own: scheduled ones start on time and finished ones settle and freeze.</p>
+      </li>
+      <li data-target="#countdown" data-title="A real deadline">
+        <p>The countdown is live. Deadlines are what make a contest feel different from a leaderboard.</p>
+      </li>
+      <li data-target="#race-lanes" data-title="The standings">
+        <p>Bars fill toward the leader, with the podium in gold, silver and bronze. Peter is pinned at the bottom so he always knows the gap.</p>
+      </li>
+      <li data-target="#prize" data-title="Prizes and rounds">
+        <p>Prizes can be anything — lunches, points, a spin of the prize wheel. Long contests can run in weekly rounds, each with its own winner.</p>
+      </li>
+      <li data-target="#comp-h2h" data-title="Team against team">
+        <p>Squads go head-to-head, summed live. On a TV this becomes a full-screen versus scene.</p>
+      </li>
+      <li data-target="#templates" data-title="Start from a template">
+        <p>Four common formats, ready to go. Pick one and the form is filled in for you.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

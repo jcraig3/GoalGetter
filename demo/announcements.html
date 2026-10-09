@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Announcements · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: wins, shout-outs and TV announcements.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="announcements">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Announcements</h1>
+          <p>Goals hit, people recognised, and announcements for the TVs.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-modal-open="recognise-modal" id="recognise-btn">Recognise someone</button>
+        </div>
+      </div>
+
+      <div class="tabs need-manager" role="group" aria-label="View">
+        <button class="tab" data-tab-group="ann" data-tab="feed" aria-pressed="true">Wins &amp; shout-outs</button>
+        <button class="tab" data-tab-group="ann" data-tab="tv" aria-pressed="false">Announcements</button>
+      </div>
+
+      <div data-panel-group="ann" data-panel="feed">
+        <div class="filters" style="--cols:2" id="feed-filters">
+          <div class="field"><label for="f-who">Who</label><input class="input" id="f-who" placeholder="A name"></div>
+          <div class="field"><label for="f-what">What</label>
+            <select class="select" id="f-what">
+              <option value="">Everything</option>
+              <option value="recognition">Recognition</option>
+              <option value="goal">Goals hit</option>
+              <option value="competition">Competitions won</option>
+              <option value="achievement">Celebration rules</option>
+              <option value="occasion">Birthdays and anniversaries</option>
+            </select>
+          </div>
+        </div>
+
+        <ul class="stack-3" id="feed">
+          <li class="feed-item" data-kind="recognition" id="feed-shoutout">
+            <span data-avatar="Peter Parker"></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Peter Parker</a> — Closed the Oscorp renewal in one call. Absolute web-slinger. 🕸️</p>
+              <p class="text-xs c-subtle mt-1">recognised by Natasha Romanoff · 22 minutes ago</p>
+              <div class="reactions" id="reactions">
+                <button class="react" aria-pressed="true">🔥 <span class="n">8</span></button>
+                <button class="react" aria-pressed="false">👏 <span class="n">5</span></button>
+                <button class="react" aria-pressed="false">🕷️ <span class="n">3</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+                <span class="text-xs c-subtle">2 comments</span>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-xs need-admin" data-toast="Playing on the Sales floor channel now" id="play-on-wall">Play on wall</button>
+          </li>
+          <li class="feed-item" data-kind="goal">
+            <span data-avatar="Shohei Ohtani"></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Shohei Ohtani</a> hit Revenue · October</p>
+              <p class="text-xs c-subtle mt-1">$74,100 of $70,000 · 1 hour ago · <a class="c-brand" href="goals.html">view</a></p>
+              <div class="reactions">
+                <button class="react" aria-pressed="false">🎉 <span class="n">14</span></button>
+                <button class="react" aria-pressed="false">⚾ <span class="n">6</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-xs need-admin" data-toast="Playing on the Sales floor channel now">Play on wall</button>
+          </li>
+          <li class="feed-item" data-kind="competition">
+            <span class="feed-trophy"><i data-icon="trophy" class="sm"></i></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Bolt Squad</a> won Bolt Squad vs. Halo Crew</p>
+              <p class="text-xs c-subtle mt-1">61 – 58 deals · settled and frozen · yesterday</p>
+              <div class="reactions">
+                <button class="react" aria-pressed="false">⚡ <span class="n">11</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-xs need-admin" data-toast="Playing on the Sales floor channel now">Play on wall</button>
+          </li>
+          <li class="feed-item" data-kind="achievement">
+            <span data-avatar="Wally West"></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Wally West</a> — 100 calls in a single day</p>
+              <p class="text-xs c-subtle mt-1">Celebration rule “Century” · yesterday</p>
+              <div class="reactions">
+                <button class="react" aria-pressed="false">⚡ <span class="n">9</span></button>
+                <button class="react" aria-pressed="false">😮 <span class="n">4</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-xs need-admin" data-toast="Playing on the Sales floor channel now">Play on wall</button>
+          </li>
+          <li class="feed-item" data-kind="occasion">
+            <span data-avatar="Mike Trout"></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Mike Trout</a> — 5 years at Stark Industries</p>
+              <p class="text-xs c-subtle mt-1">Work anniversary · 2 days ago</p>
+              <div class="reactions">
+                <button class="react" aria-pressed="false">🎂 <span class="n">21</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+              </div>
+            </div>
+          </li>
+          <li class="feed-item" data-kind="recognition">
+            <span data-avatar="Joey Bosa"></span>
+            <div class="grow">
+              <p class="c-content"><a href="#" class="font-medium">Joey Bosa</a> — Stayed late to help onboard three new reps. Team player.</p>
+              <p class="text-xs c-subtle mt-1">recognised by Justin Herbert · 3 days ago</p>
+              <div class="reactions">
+                <button class="react" aria-pressed="false">💪 <span class="n">7</span></button>
+                <button class="react add" aria-label="Add a reaction" data-toast="Any emoji works">＋</button>
+              </div>
+            </div>
+          </li>
+        </ul>
+        <p class="text-sm c-muted" id="feed-none" hidden>Nothing matches those filters.</p>
+      </div>
+
+      <div data-panel-group="ann" data-panel="tv" hidden>
+        <div class="row-between mb-4">
+          <p class="text-sm c-muted">Messages that take over the TVs for a moment, then let the rotation carry on.</p>
+          <button class="btn btn-primary" data-modal-open="tv-modal">New announcement</button>
+        </div>
+        <div class="grid-3">
+          <article class="card p-4 tv-ann">
+            <div class="tv-thumb" style="background:linear-gradient(135deg,#312e81,#831843)"><span>Town hall Friday at 3 PM</span></div>
+            <div class="row-between mt-3"><p class="c-content font-medium">Town hall Friday</p><span class="pill success">Scheduled</span></div>
+            <p class="text-xs c-subtle mt-1">Every TV · Fri 2:45 PM for 15 min</p>
+            <div class="row mt-3" style="gap:.5rem"><button class="btn btn-secondary btn-xs" data-toast="Sent — it takes over the screens now, then they carry on">Send now</button><button class="btn btn-secondary btn-xs" data-toast="Editing is in the full app">Edit</button></div>
+          </article>
+          <article class="card p-4 tv-ann">
+            <div class="tv-thumb" style="background:linear-gradient(135deg,#064e3b,#0e7490)"><span>Welcome, Kara Danvers!</span></div>
+            <div class="row-between mt-3"><p class="c-content font-medium">New starter</p><span class="pill">Sent</span></div>
+            <p class="text-xs c-subtle mt-1">Central City TVs · Monday, 1 min</p>
+            <div class="row mt-3" style="gap:.5rem"><button class="btn btn-secondary btn-xs" data-toast="Sent again">Send again</button></div>
+          </article>
+          <article class="card p-4 tv-ann">
+            <div class="tv-thumb" style="background:linear-gradient(135deg,#7c2d12,#a16207)"><span>Q4 incentive trip — details inside</span></div>
+            <div class="row-between mt-3"><p class="c-content font-medium">Incentive trip</p><span class="pill">Draft</span></div>
+            <p class="text-xs c-subtle mt-1">Not scheduled</p>
+            <div class="row mt-3" style="gap:.5rem"><button class="btn btn-secondary btn-xs" data-toast="Scheduled">Schedule</button></div>
+          </article>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="recognise-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rm-title">
+      <header>
+        <div><h2 class="text-h2" id="rm-title">Recognise someone</h2><p>It reaches them, everyone sees it on the feed, and it plays on the TVs of any channel that shows recognition.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Recognition sent — it is on the feed and the TVs" class="stack-4">
+        <div class="seg"><label><input type="radio" name="rk" checked> A person</label><label><input type="radio" name="rk"> A team</label></div>
+        <div class="field"><label for="rm-who">Who</label><select class="select" id="rm-who"><option>Carol Danvers</option><option>Clark Kent</option><option>Keenan Allen</option><option>Garret Anderson</option></select></div>
+        <div class="field"><label for="rm-msg">What for</label><textarea class="input" id="rm-msg" rows="3">Turned a cancellation call into an upgrade. Higher, further, faster.</textarea></div>
+        <div class="field"><label for="rm-song">Walk-up song <span class="c-subtle">(optional)</span></label><input class="input" id="rm-song" placeholder="A YouTube link — plays on the TVs with it"></div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Send</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal-host" id="tv-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tm-title">
+      <header>
+        <div><h2 class="text-h2" id="tm-title">New announcement</h2><p>Takes over the screens for its time, then they carry on.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Announcement scheduled" class="stack-4">
+        <div class="field"><label for="tm-h">Headline</label><input class="input" id="tm-h" value="Ice cream truck at 2 PM 🍦"></div>
+        <div class="field"><label for="tm-b">Message</label><textarea class="input" id="tm-b" rows="2">Courtesy of Mr. Stark. Gotham parking lot.</textarea></div>
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="tm-s">Screens</label><select class="select" id="tm-s"><option>Every TV</option><option>Gotham TVs</option><option>Sales floor channel</option></select></div>
+          <div class="field"><label for="tm-d">For</label><select class="select" id="tm-d"><option>1 minute</option><option>5 minutes</option><option>15 minutes</option></select></div>
+        </div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Schedule</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">What the organization is celebrating — in one feed. Goals that get hit appear on their own; recognition is the part a person writes. Everyone sees the same feed, at a desk or on a TV.</p>
+    <div class="who"><span class="pill brand">Everyone</span></div>
+    <ol>
+      <li data-target="#recognise-btn" data-title="Recognise someone">
+        <p>Anyone can give a shout-out. It notifies the person, lands on the feed, and plays on the TVs — with their walk-up song if they have one.</p>
+      </li>
+      <li data-target="#feed-shoutout" data-title="Shout-outs and automatic wins">
+        <p>Written recognition sits beside wins the system noticed: goals hit, contests won, celebration rules, birthdays and work anniversaries.</p>
+      </li>
+      <li data-target="#reactions" data-title="React like a team chat">
+        <p>Click a reaction to add yours. The whole floor can pile on, and reactions show on the TVs too.</p>
+      </li>
+      <li data-target="#feed-filters" data-title="Find a moment">
+        <p>Filter by a name or by kind. Try typing <strong>Trout</strong>, or choosing <strong>Goals hit</strong>.</p>
+      </li>
+      <li data-target="#play-on-wall" data-title="Replay on the wall">
+        <p>The best moment of the week often happens while the room is in a meeting. Admins can replay any win on the TVs.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

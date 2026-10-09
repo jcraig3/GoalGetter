@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Teams · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: teams.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="teams">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Teams</h1>
+          <p>Group agents into teams. Leaderboards and goals can be scoped to a team.</p>
+        </div>
+        <div class="page-actions need-admin">
+          <button class="btn btn-primary" data-modal-open="team-modal">New team</button>
+        </div>
+      </div>
+
+      <div class="banner mb-6 need-admin" id="unteamed" style="border-color:var(--gg-border);color:var(--gg-text-muted)">
+        <a href="users.html?q=" style="color:inherit">
+          <span class="avatar-stack"><span data-avatar="Bruce Banner" class="xs"></span><span data-avatar="Scott Lang" class="xs"></span></span>
+          <span class="grow"><strong class="c-content">2 people are on no team</strong> — they are on the company boards but no team board.</span>
+          <span class="c-brand text-sm">Assign</span>
+        </a>
+      </div>
+
+      <div class="tabs" role="group" aria-label="Which teams">
+        <button class="tab" data-tab-group="teams" data-tab="active" aria-pressed="true">Active</button>
+        <button class="tab" data-tab-group="teams" data-tab="archived" aria-pressed="false">Archived</button>
+      </div>
+
+      <div data-panel-group="teams" data-panel="active" id="teams-wrap">
+        <div class="team-head text-caption uppercase c-subtle">
+          <span>Team</span><span>Members</span><span>Office</span><span></span>
+        </div>
+        <ul class="list-card team-list" id="team-list"></ul>
+      </div>
+
+      <div data-panel-group="teams" data-panel="archived" hidden>
+        <ul class="list-card">
+          <li class="row"><span class="mark" style="background:#475569">XM</span><span class="grow c-muted">X-Men</span><span class="pill">archived</span><button class="icon-btn" aria-label="Restore" data-toast="X-Men restored">↺</button></li>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="team-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tmm-title">
+      <header>
+        <div><h2 class="text-h2" id="tmm-title">Team</h2><p>How a team is known on a wall: a name, a short name and a colour.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Team saved" class="stack-4">
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="tmm-n">Name</label><input class="input" id="tmm-n" value="Guardians"></div>
+          <div class="field"><label for="tmm-s">Short name</label><input class="input" id="tmm-s" value="GOTG" maxlength="4"></div>
+        </div>
+        <div class="field"><span class="label">Colour</span>
+          <div class="swatches mt-1">
+            <button type="button" class="swatch" style="background:#b91c1c" aria-label="Red"></button>
+            <button type="button" class="swatch" style="background:#1d4ed8" aria-label="Blue"></button>
+            <button type="button" class="swatch" style="background:#0e7490" aria-label="Teal"></button>
+            <button type="button" class="swatch" style="background:#c2410c" aria-label="Orange"></button>
+            <button type="button" class="swatch" style="background:#7c3aed" aria-label="Purple" aria-pressed="true"></button>
+            <button type="button" class="swatch" style="background:#15803d" aria-label="Green"></button>
+          </div>
+        </div>
+        <div class="field"><label for="tmm-o">Office</label><select class="select" id="tmm-o"><option>Gotham</option><option>Metropolis</option><option>Star City</option><option>Central City</option></select></div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Save</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">Teams are how people compete together. Every agent is on one team, every team sits in an office, and every board, goal and contest can be scoped to a team.</p>
+    <div class="who"><span class="pill brand">Everyone sees teams</span><span class="pill brand">Admins edit them</span></div>
+    <ol>
+      <li data-target="#unteamed" data-title="Nobody falls through the cracks">
+        <p>People without a team are called out, so nobody is quietly missing from their team’s board.</p>
+      </li>
+      <li data-target="#teams-wrap" data-title="An identity for the wall">
+        <p>Each team has a short name and a colour, so it is recognisable from across the room on a TV. Justice League follows a Microsoft Teams group, so its members sync on their own.</p>
+      </li>
+      <li data-target="#team-list" data-title="Open a team">
+        <p>Click <strong>agents</strong> on any row to see the manager and each member’s month. Moving a team to another office is one dropdown — its boards follow.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

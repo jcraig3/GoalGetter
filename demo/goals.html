@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Goals · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: goals and targets with pace.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="goals">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Goals</h1>
+          <p>Targets for people and teams. Progress is measured against the same numbers the leaderboards use.</p>
+        </div>
+        <div class="page-actions need-manager">
+          <button class="btn btn-secondary" data-toast="Bulk goals: one target for every agent on a team, in one go">Bulk goals</button>
+          <button class="btn btn-primary" data-modal-open="goal-modal" id="new-goal">New goal</button>
+        </div>
+      </div>
+
+      <section class="card org-goal" id="org-goal">
+        <div class="org-goal-grid">
+          <div>
+            <p class="text-caption uppercase c-subtle">Organization goal</p>
+            <h2 class="text-h2 mt-1">Q4 company revenue</h2>
+            <p class="text-sm c-muted">Stark Industries · October to December</p>
+            <p class="big-number mt-4"><span data-count-to="2860000" data-prefix="$">$2,860,000</span><span class="c-muted text-sm" style="font-weight:400"> of $4,200,000</span></p>
+            <div class="progress" style="height:10px" role="progressbar" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100" aria-label="Company revenue progress">
+              <div class="progress-fill" data-w="68"></div>
+              <span class="progress-marker" style="left:61%"></span>
+            </div>
+            <p class="goal-meta"><span class="pill success">Ahead</span><span>83 days left</span><span>· needs $1,340,000 more</span><span>· on pace for $4,410,000</span><span>· <span class="marker-legend"></span> expected by today</span></p>
+          </div>
+          <div class="org-goal-chart">
+            <div data-spark="120,340,610,890,1180,1460,1720,1990,2260,2580,2860" data-target="4200" data-label="Company revenue over the quarter, against a target of $4.2M" style="height:110px"></div>
+            <div class="row-between text-xs c-subtle mt-2"><span>Oct 1</span><span>Today</span><span class="c-muted">Target $4.2M ⋯</span></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="tabs mt-6" role="group" aria-label="Whose goals">
+        <button class="tab" data-tab-group="goals" data-tab="mine" aria-pressed="true">Mine<span class="count">4</span></button>
+        <button class="tab" data-tab-group="goals" data-tab="team" aria-pressed="false">Avengers<span class="count">4</span></button>
+        <button class="tab need-manager" data-tab-group="goals" data-tab="everyone" aria-pressed="false">Everyone<span class="count">38</span></button>
+        <button class="tab" data-tab-group="goals" data-tab="archived" aria-pressed="false">Archived</button>
+      </div>
+
+      <div data-panel-group="goals" data-panel="mine" id="goal-cards">
+        <div class="grid-2">
+          <article class="card goal-card" id="goal-pace">
+            <div class="row-between">
+              <a href="#" class="c-content font-medium" data-toast="Goal detail: history of every period, and who set it">Monthly revenue</a>
+              <span class="pill success">Ahead</span>
+            </div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Peter Parker" class="xs"></span>Peter Parker · October · repeats monthly</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>$48,250<span class="c-muted"> of </span>$60,000</span><span class="num c-muted">80%</span></div>
+              <div class="progress" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Revenue progress"><div class="progress-fill" data-w="80"></div><span class="progress-marker" style="left:61%"></span></div>
+              <div class="mt-3" data-spark="3200,9100,15800,22400,29000,36100,41900,48250" data-target="60000" data-label="Revenue over October against a $60,000 target"></div>
+              <ul class="row wrap mt-2" style="gap:.375rem" aria-label="Stretch levels"><li class="pill">Stretch · $75,000</li><li class="pill">Legend · $90,000</li></ul>
+              <p class="goal-meta"><span>12 days left</span><span>· needs $11,750 more</span><span>· on pace for $79,100</span><span>· <span class="marker-legend"></span> expected by today</span></p>
+            </div>
+          </article>
+
+          <article class="card goal-card" id="goal-stretch">
+            <div class="row-between">
+              <a href="#" class="c-content font-medium" data-toast="Goal detail: history of every period, and who set it">Calls</a>
+              <span class="pill success">Hit</span>
+            </div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Peter Parker" class="xs"></span>Peter Parker · October · repeats monthly</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>412<span class="c-muted"> of </span>400</span><span class="num c-success">103%</span></div>
+              <div class="progress" role="progressbar" aria-valuenow="103" aria-valuemin="0" aria-valuemax="100" aria-label="Calls progress"><div class="progress-fill hit" data-w="100"></div></div>
+              <div class="mt-3" data-spark="40,88,130,190,240,301,355,412" data-target="400" data-label="Calls over October against a target of 400"></div>
+              <ul class="row wrap mt-2" style="gap:.375rem" aria-label="Stretch levels"><li class="pill success">✓ Target · 400</li><li class="pill">Stretch · 450</li><li class="pill">Legend · 520</li></ul>
+              <p class="goal-meta"><span>12 days left</span><span>· 38 more for Stretch</span></p>
+            </div>
+          </article>
+
+          <article class="card goal-card">
+            <div class="row-between">
+              <a href="#" class="c-content font-medium" data-toast="Goal detail: history of every period, and who set it">Appointments set</a>
+              <span class="pill">On track</span>
+            </div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Peter Parker" class="xs"></span>Peter Parker · October · repeats monthly</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>31<span class="c-muted"> of </span>45</span><span class="num c-muted">69%</span></div>
+              <div class="progress" role="progressbar" aria-valuenow="69" aria-valuemin="0" aria-valuemax="100" aria-label="Appointments progress"><div class="progress-fill" data-w="69"></div><span class="progress-marker" style="left:61%"></span></div>
+              <div class="mt-3" data-spark="3,6,10,14,17,22,27,31" data-target="45" data-label="Appointments over October against a target of 45"></div>
+              <p class="goal-meta"><span>12 days left</span><span>· needs 14 more</span><span>· on pace for 51</span></p>
+            </div>
+          </article>
+
+          <article class="card goal-card">
+            <div class="row-between">
+              <a href="#" class="c-content font-medium" data-toast="Goal detail: history of every period, and who set it">Average handle time</a>
+              <span class="pill success">Ahead</span>
+            </div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Peter Parker" class="xs"></span>Peter Parker · October · repeats monthly</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>6m 40s<span class="c-muted"> against a cap of </span>8m 00s</span><span class="num c-muted">83%</span></div>
+              <div class="progress" role="progressbar" aria-valuenow="83" aria-valuemin="0" aria-valuemax="100" aria-label="Handle time progress"><div class="progress-fill" data-w="83"></div></div>
+              <p class="goal-meta"><span>12 days left</span><span>· lower is better</span><span>· averages are not paced</span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div data-panel-group="goals" data-panel="team" hidden>
+        <div class="grid-2">
+          <article class="card goal-card">
+            <div class="row-between"><span class="c-content font-medium">Deals closed</span><span class="pill warning">Behind</span></div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span class="mark" style="background:#b91c1c;width:18px;height:18px;font-size:8px">AVG</span>Avengers · October</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>52<span class="c-muted"> of </span>100</span><span class="num c-muted">52%</span></div>
+              <div class="progress"><div class="progress-fill" data-w="52"></div><span class="progress-marker" style="left:61%"></span></div>
+              <p class="goal-meta"><span>12 days left</span><span>· needs 48 more</span><span>· on pace for 85</span></p>
+            </div>
+          </article>
+          <article class="card goal-card">
+            <div class="row-between"><span class="c-content font-medium">Team revenue</span><span class="pill">On track</span></div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span class="mark" style="background:#b91c1c;width:18px;height:18px;font-size:8px">AVG</span>Avengers · October</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>$233,400<span class="c-muted"> of </span>$360,000</span><span class="num c-muted">65%</span></div>
+              <div class="progress"><div class="progress-fill" data-w="65"></div><span class="progress-marker" style="left:61%"></span></div>
+              <p class="goal-meta"><span>12 days left</span><span>· needs $126,600 more</span></p>
+            </div>
+          </article>
+          <article class="card goal-card">
+            <div class="row-between"><span class="c-content font-medium">Monthly revenue</span><span class="pill success">Hit</span></div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Natasha Romanoff" class="xs"></span>Natasha Romanoff · October</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>$61,400<span class="c-muted"> of </span>$60,000</span><span class="num c-success">102%</span></div>
+              <div class="progress"><div class="progress-fill hit" data-w="100"></div></div>
+              <p class="goal-meta"><span>12 days left</span><span>· hit on Oct 18 🎉</span></p>
+            </div>
+          </article>
+          <article class="card goal-card">
+            <div class="row-between"><span class="c-content font-medium">Calls</span><span class="pill warning">Behind</span></div>
+            <p class="row text-xs c-subtle mt-1" style="gap:.4rem"><span data-avatar="Sam Wilson" class="xs"></span>Sam Wilson · October</p>
+            <div class="mt-4">
+              <div class="row-between text-sm"><span>256<span class="c-muted"> of </span>400</span><span class="num c-muted">64%</span></div>
+              <div class="progress"><div class="progress-fill" data-w="64"></div><span class="progress-marker" style="left:61%"></span></div>
+              <p class="goal-meta"><span>12 days left</span><span>· needs 144 more</span></p>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div data-panel-group="goals" data-panel="everyone" hidden>
+        <div class="table-wrap">
+          <table class="gg gg-stack">
+            <thead><tr><th>Who</th><th>Goal</th><th>Progress</th><th class="right">Status</th></tr></thead>
+            <tbody>
+              <tr><td data-primary><div class="who"><span data-avatar="Shohei Ohtani"></span><div><p class="name">Shohei Ohtani</p><p class="sub">Halo Crew</p></div></div></td><td data-label="Goal">Revenue · October</td><td data-label="Progress" style="min-width:10rem"><div class="progress" style="margin:0"><div class="progress-fill hit" data-w="100"></div></div></td><td data-label="Status" class="right"><span class="pill success">Hit</span></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="LaDainian Tomlinson"></span><div><p class="name">LaDainian Tomlinson</p><p class="sub">Bolt Squad</p></div></div></td><td data-label="Goal">Revenue · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="96"></div></div></td><td data-label="Status" class="right"><span class="pill success">Ahead</span></td></tr>
+              <tr><td data-primary><div class="who"><span class="mark" style="background:#0e7490">BLT</span><div><p class="name">Bolt Squad</p><p class="sub">Star City</p></div></div></td><td data-label="Goal">Deals closed · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="71"></div></div></td><td data-label="Status" class="right"><span class="pill success">Ahead</span></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Wally West"></span><div><p class="name">Wally West</p><p class="sub">Speed Force</p></div></div></td><td data-label="Goal">Calls · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill hit" data-w="100"></div></div></td><td data-label="Status" class="right"><span class="pill success">Hit</span></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Arthur Curry"></span><div><p class="name">Arthur Curry</p><p class="sub">Justice League</p></div></div></td><td data-label="Goal">Appointments set · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="42"></div></div></td><td data-label="Status" class="right"><span class="pill warning">Behind</span></td></tr>
+              <tr><td data-primary><div class="who"><span data-avatar="Billy Batson"></span><div><p class="name">Billy Batson</p><p class="sub">Speed Force</p></div></div></td><td data-label="Goal">Revenue · October</td><td data-label="Progress"><div class="progress" style="margin:0"><div class="progress-fill" data-w="44"></div></div></td><td data-label="Status" class="right"><span class="pill warning">Behind</span></td></tr>
+            </tbody>
+          </table>
+          <p class="table-foot">Showing 6 of 38.</p>
+        </div>
+      </div>
+
+      <div data-panel-group="goals" data-panel="archived" hidden>
+        <div class="empty">
+          <span class="empty-icon"><i data-icon="archive"></i></span>
+          <h3 class="text-h3">Nothing archived</h3>
+          <p>An archived goal keeps every period it ever measured. Archive rather than delete once a goal has history.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="goal-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="gm-title" style="max-width:40rem">
+      <header>
+        <div><h2 class="text-h2" id="gm-title">New goal</h2><p>A target for a person, a team or everyone, on any metric.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Goal set — Peter will see it on Home" id="goal-form" class="stack-4">
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="g-metric">Metric</label><select class="select" id="g-metric"><option>Revenue</option><option>Calls</option><option>Appointments set</option><option>Deals closed</option></select></div>
+          <div class="field"><label for="g-who">For</label><select class="select" id="g-who"><option>Peter Parker</option><option>Avengers</option><option>Everyone at Stark</option></select></div>
+          <div class="field"><label for="g-period">Period</label><select class="select" id="g-period"><option>Every month</option><option>Every week</option><option>Every quarter</option><option>A date range</option></select></div>
+          <div class="field"><label for="g-target">Target</label><input class="input num" id="g-target" inputmode="decimal" value="60000"></div>
+        </div>
+        <div class="row wrap" style="gap:.375rem">
+          <span class="text-xs c-subtle">Suggested from the last 3 months:</span>
+          <button type="button" class="pill" data-g-target="52000">Average · 52,000</button>
+          <button type="button" class="pill" data-g-target="60000">+15% · 60,000</button>
+          <button type="button" class="pill" data-g-target="45000">Easy win · 45,000</button>
+        </div>
+        <div class="field"><label for="g-name">Name <span class="c-subtle">(optional)</span></label><input class="input" id="g-name" placeholder="Monthly revenue"></div>
+
+        <div class="preview-box">
+          <p class="text-caption uppercase c-subtle">Preview — as Peter will see it</p>
+          <p class="text-sm c-content mt-2" id="gp-title">Revenue · Peter Parker</p>
+          <div class="row-between text-sm mt-1"><span id="gp-values"></span><span id="gp-pct" class="num c-muted"></span></div>
+          <div class="progress"><div class="progress-fill" id="gp-fill" style="width:0"></div><span class="progress-marker" style="left:61%"></span></div>
+          <p class="goal-meta"><span class="pill" id="gp-status">On track</span><span>12 days left</span><span id="gp-needs"></span></p>
+        </div>
+
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Set goal</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">Targets for people, teams and the whole company — measured against the same numbers the leaderboards use, so nobody argues about which figure is right.</p>
+    <div class="who"><span class="pill brand">Agents see theirs</span><span class="pill brand">Managers set them</span></div>
+    <ol>
+      <li data-target="#org-goal" data-title="One number for the whole company">
+        <p>An organization-level goal everyone contributes to. The trend line shows the climb against the dashed target line, so “will we make it” is a glance, not a sum.</p>
+      </li>
+      <li data-target="#goal-pace" data-title="Pace, not just progress">
+        <p>The marker on the bar is where Peter should be by today. He is at 80% with the marker at 61%, so he is <strong>Ahead</strong> — and GoalGetter projects where he will finish.</p>
+      </li>
+      <li data-target="#goal-stretch" data-title="Stretch levels past the target">
+        <p>Hitting the target is not the ceiling. Stretch and Legend levels light up as they are reached, and each can trigger its own celebration on the TVs.</p>
+      </li>
+      <li data-target="#new-goal" data-title="Set one in seconds">
+        <p>Open <strong>New goal</strong>. Targets are suggested from each person’s last three months, and the preview shows exactly what they will see. Change the target and watch it update.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

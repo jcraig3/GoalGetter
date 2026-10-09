@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TVs &amp; Channels · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: TVs and channels.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/wall.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="channels">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent for-manager">Only admins manage TVs — it is shown here so you can explore it.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">TVs &amp; Channels</h1>
+          <p>What plays on the walls, and which TVs are connected. A channel is a playlist of slides; a TV plays one channel.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-primary" data-toast="New channel: name it, then add slides">New channel</button>
+          <button class="btn btn-secondary" data-modal-open="pair-modal" id="pair-btn">Pair a TV</button>
+        </div>
+      </div>
+
+      <div class="channel-layout">
+        <section id="channel-editor">
+          <div class="card p-0 overflow-hidden">
+            <div class="channel-editor-head">
+              <div>
+                <div class="row" style="gap:.5rem"><h2 class="text-h3">Sales floor</h2><span class="pill success">On 3 TVs</span></div>
+                <p class="text-xs c-subtle mt-1">5 slides · rotates every 5 seconds · celebrations take over</p>
+              </div>
+              <a class="btn btn-secondary btn-xs" href="tv-wall.html">Open full screen</a>
+            </div>
+            <div class="stage-frame" id="preview-frame">
+              <div class="stage" id="channel-stage"></div>
+            </div>
+            <ol class="slide-strip" id="slide-strip">
+              <li><button data-slide="0"><span class="thumb t-podium"></span><span class="text-xs">Revenue podium</span></button></li>
+              <li><button data-slide="1"><span class="thumb t-race"></span><span class="text-xs">Call Blitz race</span></button></li>
+              <li><button data-slide="2"><span class="thumb t-gauge"></span><span class="text-xs">Q4 goal gauge</span></button></li>
+              <li><button data-slide="3"><span class="thumb t-h2h"></span><span class="text-xs">Head-to-head</span></button></li>
+              <li><button data-slide="4"><span class="thumb t-ann"></span><span class="text-xs">Town hall</span></button></li>
+              <li><button class="add-slide" data-modal-open="slide-modal"><span class="thumb add">＋</span><span class="text-xs">Add a slide</span></button></li>
+            </ol>
+          </div>
+        </section>
+
+        <aside class="stack-6">
+          <section class="card" id="tv-list">
+            <div class="row-between"><h2 class="text-h3">TVs</h2><span class="text-xs c-subtle">4 connected</span></div>
+            <ul class="stack-3 mt-4">
+              <li class="tv-row"><span class="tv-ico"><i data-icon="tv" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Gotham — sales floor</p><p class="text-xs c-subtle"><span class="dot success" style="width:6px;height:6px;box-shadow:none"></span> Online · Sales floor</p></div><button class="icon-btn" aria-label="Reload Gotham — sales floor" data-toast="Reloaded — the TV picks it up in a few seconds"><i data-icon="refresh" class="sm"></i></button></li>
+              <li class="tv-row"><span class="tv-ico"><i data-icon="tv" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Gotham — break room</p><p class="text-xs c-subtle"><span class="dot success" style="width:6px;height:6px;box-shadow:none"></span> Online · Wins &amp; birthdays</p></div><button class="icon-btn" aria-label="Reload" data-toast="Reloaded"><i data-icon="refresh" class="sm"></i></button></li>
+              <li class="tv-row"><span class="tv-ico"><i data-icon="tv" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Star City — main</p><p class="text-xs c-subtle"><span class="dot success" style="width:6px;height:6px;box-shadow:none"></span> Online · Sales floor · sound on</p></div><button class="icon-btn" aria-label="Reload" data-toast="Reloaded"><i data-icon="refresh" class="sm"></i></button></li>
+              <li class="tv-row"><span class="tv-ico"><i data-icon="tv" class="sm"></i></span><div class="grow"><p class="text-sm c-content">Metropolis — lobby</p><p class="text-xs c-warning"><span class="dot warning" style="width:6px;height:6px"></span> Last seen 2 h ago</p></div><button class="icon-btn" aria-label="Reload" data-toast="Asked to reload when it next checks in"><i data-icon="refresh" class="sm"></i></button></li>
+            </ul>
+          </section>
+
+          <section class="card" id="channel-list">
+            <h2 class="text-h3">Channels</h2>
+            <ul class="stack-3 mt-4">
+              <li class="row"><span class="chan-chip" style="background:linear-gradient(135deg,#4f46e5,#a855f7)"></span><div class="grow"><p class="text-sm c-content">Sales floor</p><p class="text-xs c-subtle">5 slides · 2 TVs</p></div><span class="pill brand">Editing</span></li>
+              <li class="row"><span class="chan-chip" style="background:linear-gradient(135deg,#be185d,#f59e0b)"></span><div class="grow"><p class="text-sm c-content">Wins &amp; birthdays</p><p class="text-xs c-subtle">3 slides · 1 TV</p></div></li>
+              <li class="row"><span class="chan-chip" style="background:linear-gradient(135deg,#0e7490,#34d399)"></span><div class="grow"><p class="text-sm c-content">Lobby — company goals</p><p class="text-xs c-subtle">2 slides · 1 TV · weekdays 8–6</p></div></li>
+            </ul>
+          </section>
+        </aside>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="pair-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="pm-title">
+      <header>
+        <div><h2 class="text-h2" id="pm-title">Pair a TV</h2><p>No account on the TV, no password typed with a remote.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <ol class="pair-steps">
+        <li><span class="n">1</span><p>On the TV’s browser, open <strong class="c-content">goalgetter.stark.example/pair</strong></p></li>
+        <li><span class="n">2</span><p>Type the code it shows here:</p></li>
+      </ol>
+      <div class="pair-code num" id="pair-code">K7Q 4MZ</div>
+      <div class="field mt-4"><label for="pm-ch">It plays</label><select class="select" id="pm-ch"><option>Sales floor</option><option>Wins &amp; birthdays</option><option>Lobby — company goals</option></select></div>
+      <div class="actions"><button class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" data-modal-close data-toast="Waiting for the TV… paired! It is playing Sales floor.">Done</button></div>
+    </div>
+  </div>
+
+  <div class="modal-host" id="slide-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="sm-title" style="max-width:40rem">
+      <header>
+        <div><h2 class="text-h2" id="sm-title">Add a slide</h2><p>Anything in GoalGetter can be a slide.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <div class="slide-types">
+        <button data-modal-close data-toast="Leaderboard slide added">🏆<strong>Leaderboard</strong><span>Table, podium or spotlight</span></button>
+        <button data-modal-close data-toast="Goal slide added">🎯<strong>Goal</strong><span>A gauge for a big number</span></button>
+        <button data-modal-close data-toast="Competition slide added">🏁<strong>Competition</strong><span>Race track, regatta, summit</span></button>
+        <button data-modal-close data-toast="Comparison slide added">⚔️<strong>Comparison</strong><span>Team against team</span></button>
+        <button data-modal-close data-toast="Feed slide added">📣<strong>Wins feed</strong><span>Shout-outs as they land</span></button>
+        <button data-modal-close data-toast="Media slide added">🎬<strong>Picture or video</strong><span>From your asset library</span></button>
+      </div>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">The office TVs are GoalGetter’s most visible surface. Channels are playlists of live slides; each TV plays one channel, and any win can take over every screen.</p>
+    <div class="who"><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#preview-frame" data-title="A live preview">
+        <p>This is the real wall renderer at a smaller size — exactly what the TV shows, live. It rotates on its own; the next step opens it full screen.</p>
+      </li>
+      <li data-target="#slide-strip" data-title="Slides are live data">
+        <p>Click a slide to jump to it. Leaderboards, goals, contests, head-to-heads, the wins feed, pictures and video — all update as numbers arrive.</p>
+      </li>
+      <li data-target="#tv-list" data-title="Every TV, accounted for">
+        <p>See which screens are online and what each is playing. A TV that drops off is flagged, and any TV can be reloaded remotely.</p>
+      </li>
+      <li data-target="#pair-btn" data-title="Pair with a code">
+        <p>Open the TV’s browser, type a six-character code, done. No account on a shared screen.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

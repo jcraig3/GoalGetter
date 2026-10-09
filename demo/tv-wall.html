@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The TV wall · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: the full-screen TV wall.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/wall.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="tv-wall" data-shell="wall">
+  <main class="app-main" id="main">
+    <div class="wall-host">
+      <div class="stage fill" id="wall-stage"></div>
+
+      <div class="wall-controls" id="wall-controls">
+        <div class="wc-group" role="group" aria-label="Slides">
+          <button data-scene-btn="podium" aria-pressed="true">Podium</button>
+          <button data-scene-btn="race">Race</button>
+          <button data-scene-btn="gauge">Goal</button>
+          <button data-scene-btn="h2h">Versus</button>
+          <button data-scene-btn="announce">News</button>
+        </div>
+        <div class="wc-group">
+          <button id="w-prev" aria-label="Previous slide"><i data-icon="left" class="sm"></i></button>
+          <button id="w-pause" aria-label="Pause rotation"><i data-icon="pause" class="sm"></i></button>
+          <button id="w-next" aria-label="Next slide"><i data-icon="right" class="sm"></i></button>
+          <button id="w-full" aria-label="Full screen"><i data-icon="tv" class="sm"></i></button>
+        </div>
+        <button class="wc-celebrate" id="w-celebrate">🏆 Play a celebration</button>
+      </div>
+    </div>
+  </main>
+
+  <template id="guide">
+    <p class="intro">This is what hangs on the office wall. Dark by design, readable from across the room, and alive: it rotates through live slides and stops everything when someone wins.</p>
+    <div class="who"><span class="pill brand">The whole office</span></div>
+    <ol>
+      <li data-target="#wall-stage" data-title="Built for distance">
+        <p>Big type, high contrast and a dark background that does not glare in an office. The TV signs in with a pairing code, not a person’s account.</p>
+      </li>
+      <li data-target="#wall-controls" data-title="Slides that rotate">
+        <p>A podium, a race track, a goal gauge, a head-to-head and news. Use these buttons to jump between them, or pause the rotation.</p>
+        <p>Watch the podium: an <strong>overtake</strong> banner drops in when someone takes a place.</p>
+      </li>
+      <li data-target="#w-celebrate" data-title="The celebration takeover">
+        <p>When a goal is hit, every screen stops for a trophy, confetti, the person’s photo — and their walk-up song if they have one. Press it again for another winner.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

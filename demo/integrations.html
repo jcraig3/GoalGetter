@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Integrations &amp; Metrics · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: data sources and metrics.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="integrations">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <p class="role-note for-agent for-manager">Only admins connect data — it is shown here so you can explore it.</p>
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Integrations</h1>
+          <p>Connect the systems your people and performance data already live in.</p>
+        </div>
+        <div class="page-actions">
+          <button class="btn btn-secondary" data-toast="Step-by-step guides for each connector, including where to find each key">Need help?</button>
+        </div>
+      </div>
+
+      <section id="sources">
+        <h2 class="text-h3 mb-4">Connected</h2>
+        <ul class="list-card source-list">
+          <li>
+            <span class="conn" style="background:#0f9d58">GS</span>
+            <div class="grow"><p class="c-content">Sales tracker</p><p class="text-xs c-subtle sync-when">Google Sheets · every 5 min · 4 min ago · 1,284 rows</p></div>
+            <span class="sync-status"><span class="pill success">Healthy</span></span>
+            <button class="btn btn-secondary btn-xs" data-sync="1,284">Sync now</button>
+          </li>
+          <li>
+            <span class="conn" style="background:#475569"><i data-icon="plug" class="sm"></i></span>
+            <div class="grow"><p class="c-content">Phone system</p><p class="text-xs c-warning sync-when">Webhook · last row 2 days ago</p></div>
+            <span class="sync-status"><span class="pill warning">Stale</span></span>
+            <button class="btn btn-secondary btn-xs" data-sync="3,407">Sync now</button>
+          </li>
+          <li>
+            <span class="conn" style="background:#2563eb"><i data-icon="database" class="sm"></i></span>
+            <div class="grow"><p class="c-content">Revenue warehouse</p><p class="text-xs c-subtle sync-when">Snowflake · hourly · 22 min ago · 6 queries</p></div>
+            <span class="sync-status"><span class="pill success">Healthy</span></span>
+            <button class="btn btn-secondary btn-xs" data-sync="9,812">Sync now</button>
+          </li>
+          <li>
+            <span class="conn" style="background:#0078d4">365</span>
+            <div class="grow"><p class="c-content">Company directory</p><p class="text-xs c-subtle sync-when">Microsoft 365 · people, teams and offices · 1 h ago</p></div>
+            <span class="sync-status"><span class="pill success">Healthy</span></span>
+            <button class="btn btn-secondary btn-xs" data-sync="33">Sync now</button>
+          </li>
+        </ul>
+      </section>
+
+      <section class="mt-6" id="connectors">
+        <div class="row-between mb-4"><h2 class="text-h3">Add a source</h2><span class="text-xs c-subtle">Every connector is optional — a spreadsheet is enough to start.</span></div>
+        <div class="conn-grid">
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#16a34a">CSV</span><strong>CSV or Excel file</strong><span>Upload once or on a schedule</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#0f9d58">GS</span><strong>Google Sheets</strong><span>A tab, read every few minutes</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#107c41">XL</span><strong>Excel online</strong><span>OneDrive or SharePoint</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#2563eb"><i data-icon="database" class="sm"></i></span><strong>Snowflake</strong><span>A query per table or view</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#334155"><i data-icon="database" class="sm"></i></span><strong>SQL database</strong><span>Postgres, SQL Server, MySQL</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#475569"><i data-icon="plug" class="sm"></i></span><strong>Webhook</strong><span>Your systems push rows in</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#7c3aed">API</span><strong>REST API</strong><span>GoalGetter polls an endpoint</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#0e7490">CRM</span><strong>CRM</strong><span>Deals and activities</span></button>
+          <button class="conn-tile" data-modal-open="map-modal"><span class="conn" style="background:#c2410c">HD</span><strong>Help desk</strong><span>Tickets solved, CSAT</span></button>
+        </div>
+      </section>
+
+      <section class="mt-6" id="metrics">
+        <div class="page-header" style="margin-bottom:1rem">
+          <div>
+            <h2 class="text-h2">Metrics</h2>
+            <p>What this organization measures. Everything else — goals, leaderboards, competitions — ranks one of these.</p>
+          </div>
+          <button class="btn btn-primary" data-toast="New metric: a name, a unit, and how rows add up">New metric</button>
+        </div>
+        <div class="table-wrap">
+          <table class="gg gg-stack">
+            <thead><tr><th>Metric</th><th>Unit</th><th>Adds up by</th><th>Better is</th><th class="right">Used by</th></tr></thead>
+            <tbody>
+              <tr><td data-primary><p class="c-content">Revenue</p><p class="text-xs c-subtle">revenue · from Sales tracker, Revenue warehouse</p></td><td data-label="Unit">Currency (USD)</td><td data-label="Adds up by">Sum</td><td data-label="Better is">Higher</td><td data-label="Used by" class="right c-muted">14 goals · 4 boards</td></tr>
+              <tr><td data-primary><p class="c-content">Calls</p><p class="text-xs c-subtle">calls · from Phone system</p></td><td data-label="Unit">Count</td><td data-label="Adds up by">Count</td><td data-label="Better is">Higher</td><td data-label="Used by" class="right c-muted">9 goals · 2 boards</td></tr>
+              <tr><td data-primary><p class="c-content">Deals closed</p><p class="text-xs c-subtle">deals · from Sales tracker</p></td><td data-label="Unit">Count</td><td data-label="Adds up by">Count</td><td data-label="Better is">Higher</td><td data-label="Used by" class="right c-muted">7 goals · 2 boards</td></tr>
+              <tr><td data-primary><p class="c-content">Appointments set</p><p class="text-xs c-subtle">appointments · from Sales tracker</p></td><td data-label="Unit">Count</td><td data-label="Adds up by">Count</td><td data-label="Better is">Higher</td><td data-label="Used by" class="right c-muted">6 goals · 1 board</td></tr>
+              <tr><td data-primary><p class="c-content">Average handle time</p><p class="text-xs c-subtle">aht · from Phone system</p></td><td data-label="Unit">Duration</td><td data-label="Adds up by">Average</td><td data-label="Better is">Lower</td><td data-label="Used by" class="right c-muted">2 goals</td></tr>
+              <tr><td data-primary><p class="c-content">Close rate <span class="pill brand">Derived</span></p><p class="text-xs c-subtle">Deals closed ÷ Appointments set</p></td><td data-label="Unit">Percent</td><td data-label="Adds up by">Formula</td><td data-label="Better is">Higher</td><td data-label="Used by" class="right c-muted">1 board</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="map-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="mm-title" style="max-width:44rem">
+      <header>
+        <div><h2 class="text-h2" id="mm-title">Map your columns</h2><p>Tell GoalGetter what each column means. It remembers, so the next file just works.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <div class="steps-bar"><span class="done">1 · Connect</span><span class="now">2 · Map</span><span>3 · Check</span></div>
+      <div class="table-wrap mt-4">
+        <table class="gg">
+          <thead><tr><th>Column in your file</th><th>Sample</th><th>Means</th></tr></thead>
+          <tbody>
+            <tr><td class="c-content">Rep Email</td><td class="c-subtle text-xs">peter.parker@stark.example</td><td><select class="select" style="margin:0"><option>Who — matched by email</option></select></td></tr>
+            <tr><td class="c-content">Close Date</td><td class="c-subtle text-xs">2026-10-08</td><td><select class="select" style="margin:0"><option>When</option></select></td></tr>
+            <tr><td class="c-content">Amount</td><td class="c-subtle text-xs">4,250.00</td><td><select class="select" style="margin:0"><option>Revenue</option><option>Deals closed (count rows)</option></select></td></tr>
+            <tr><td class="c-content">Stage</td><td class="c-subtle text-xs">Closed Won</td><td><select class="select" style="margin:0"><option>Only rows where Stage = Closed Won</option><option>Ignore</option></select></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs c-success mt-3">✓ 1,284 rows read · 1,280 matched to people · 4 with an unknown email (shown in the Inbox)</p>
+      <div class="actions"><button class="btn btn-secondary" data-modal-close>Back</button><button class="btn btn-primary" data-modal-close data-toast="Connected — leaderboards are updating">Save and sync</button></div>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">Data comes in, becomes a metric, and everything else ranks it. GoalGetter reads your numbers from where they already live — agents never type their own, so the boards stay trustworthy.</p>
+    <div class="who"><span class="pill brand">Admins</span></div>
+    <ol>
+      <li data-target="#sources" data-title="Every source, with its health">
+        <p>Each connected source shows when it last sent data. The phone system has gone quiet, so it is flagged — here, on Home, and in the admin Inbox.</p>
+        <p>Press <strong>Sync now</strong> to pull fresh rows.</p>
+      </li>
+      <li data-target="#connectors" data-title="Start with a spreadsheet">
+        <p>No CRM or warehouse needed — a CSV or a Google Sheet is enough. Click any tile to see the column-mapping step.</p>
+      </li>
+      <li data-target="#metrics" data-title="Metrics: what you measure">
+        <p>Each metric knows its unit, how rows add up, and whether lower is better. Derived metrics like close rate are formulas over others.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>

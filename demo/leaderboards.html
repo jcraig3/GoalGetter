@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Leaderboards · GoalGetter demo</title>
+  <meta name="description" content="GoalGetter demo: live leaderboards.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Ccircle cx='12' cy='12' r='5'/%3E%3Ccircle cx='12' cy='12' r='1.5'/%3E%3C/svg%3E">
+  <script>try{var t=localStorage.getItem('ggdemo:theme');if(t)document.documentElement.dataset.theme=t}catch(e){}</script>
+  <link rel="stylesheet" href="styling/app.css">
+  <link rel="stylesheet" href="styling/pages.css">
+  <link rel="stylesheet" href="styling/tour.css">
+  <script src="js/demo.js" defer></script>
+  <script src="js/pages.js" defer></script>
+</head>
+<body class="tour" data-page="leaderboards">
+  <main class="app-main" id="main">
+    <div class="app-container">
+
+      <div class="page-header">
+        <div>
+          <h1 class="text-h1">Leaderboards</h1>
+          <p>Who is ahead, for a metric over a period. Always live — updates as the numbers arrive.</p>
+        </div>
+        <div class="page-actions need-manager">
+          <button class="btn btn-primary" data-modal-open="board-modal">New leaderboard</button>
+        </div>
+      </div>
+
+      <div class="tabs" role="group" aria-label="Which boards">
+        <button class="tab" data-tab-group="lb" data-tab="active" aria-pressed="true">Active</button>
+        <button class="tab" data-tab-group="lb" data-tab="archived" aria-pressed="false">Archived</button>
+      </div>
+
+      <div data-panel-group="lb" data-panel="active">
+        <div id="board-cards-wrap">
+          <div id="board-cards" class="grid-3 board-grid"></div>
+        </div>
+
+        <section class="mt-6" id="board-view">
+          <div class="row-between wrap mb-4" style="align-items:center">
+            <div>
+              <h2 class="text-h2" id="board-title">Revenue · October</h2>
+              <p class="text-sm c-muted mt-1" id="board-meta"></p>
+            </div>
+            <div class="row wrap" style="gap:.5rem">
+              <div class="period-nav" id="period-nav">
+                <button class="icon-btn" aria-label="Previous period" data-toast="September is frozen — results settle when a period ends">‹</button>
+                <span class="text-sm">October</span>
+                <button class="icon-btn" aria-label="Next period" disabled style="opacity:.35">›</button>
+              </div>
+              <span class="live-chip"><span class="dot success"></span><span id="lb-live">Live</span></span>
+              <button class="btn btn-secondary need-admin" data-toast="Added to the Sales floor channel — it plays on 3 TVs">Show on TV</button>
+            </div>
+          </div>
+
+          <div class="sim-bar" id="sim-bar">
+            <div class="grow">
+              <p class="text-sm c-content">Watch it move</p>
+              <p class="text-xs c-subtle">New numbers arrive from your data sources. Rows glide to their new place so you can see what changed.</p>
+            </div>
+            <label class="row text-sm c-muted" style="gap:.5rem">Auto <button type="button" class="toggle" id="auto" aria-label="Keep simulating"></button></label>
+            <button class="btn btn-primary" id="simulate"><i data-icon="refresh" class="sm"></i>Simulate new numbers</button>
+          </div>
+
+          <div id="lb-table-wrap" class="mt-4">
+            <div id="lb-table" aria-live="polite"></div>
+          </div>
+        </section>
+      </div>
+
+      <div data-panel-group="lb" data-panel="archived" hidden>
+        <div class="empty">
+          <span class="empty-icon"><i data-icon="archive"></i></span>
+          <h3 class="text-h3">Nothing archived</h3>
+          <p>An archived board keeps its history and stops appearing on Home and the TVs. Restore it any time.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="modal-host" id="board-modal" hidden>
+    <div class="scrim"></div>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="bm-title">
+      <header>
+        <div><h2 class="text-h2" id="bm-title">New leaderboard</h2><p>Always live — it updates as the numbers arrive.</p></div>
+        <button class="icon-btn" data-modal-close aria-label="Close"><i data-icon="close"></i></button>
+      </header>
+      <form data-toast="Leaderboard created — it is live now" class="stack-4">
+        <div class="field"><label for="bm-name">Name</label><input class="input" id="bm-name" value="Talk time · This week"></div>
+        <div class="filters" style="--cols:2;margin:0">
+          <div class="field"><label for="bm-metric">Metric</label><select class="select" id="bm-metric"><option>Talk time</option><option>Revenue</option><option>Calls</option><option>Deals closed</option><option>Appointments set</option></select></div>
+          <div class="field"><label for="bm-rank">Rank</label><select class="select" id="bm-rank"><option>People</option><option>Teams</option><option>Offices</option></select></div>
+          <div class="field"><label for="bm-period">Period</label><select class="select" id="bm-period"><option>This week</option><option>Today</option><option>This month</option><option>This quarter</option></select></div>
+          <div class="field"><label for="bm-who">Who is on it</label><select class="select" id="bm-who"><option>Everyone</option><option>Avengers</option><option>Gotham office</option></select></div>
+        </div>
+        <div class="field"><span class="label">Who can see it</span>
+          <div class="seg mt-1"><label><input type="radio" name="vis" checked> Everyone</label><label><input type="radio" name="vis"> Managers only</label></div>
+        </div>
+        <div class="actions"><button type="button" class="btn btn-secondary" data-modal-close>Cancel</button><button class="btn btn-primary" type="submit">Create</button></div>
+      </form>
+    </div>
+  </div>
+
+  <template id="guide">
+    <p class="intro">The most looked-at surface in the product. Any metric, ranked for people, teams or offices, for any period — and always live.</p>
+    <div class="who"><span class="pill brand">Everyone</span></div>
+    <ol>
+      <li data-target="#board-cards-wrap" data-title="Every board at a glance">
+        <p>Each card shows who is leading and where <em>you</em> are. Click one to open it — try <strong>Team revenue</strong> or <strong>Office revenue</strong> to see the same data ranked by group.</p>
+      </li>
+      <li data-target="#sim-bar" data-title="Watch a refresh">
+        <p>Press <strong>Simulate new numbers</strong>. When data arrives, rows animate to their new rank — a hard swap would make people think the page glitched.</p>
+        <p>Turn on <strong>Auto</strong> to watch it keep going.</p>
+      </li>
+      <li data-target="#lb-table-wrap" data-title="Medals, movement and you">
+        <p>Gold, silver and bronze for the podium; ▲/▼ with a number for movement, so colour is never the only signal.</p>
+        <p>Peter is 12th on Revenue, so his row is pinned under the top ten. Being 12th is exactly when you most want to know where you are.</p>
+      </li>
+      <li data-target="#period-nav" data-title="Periods that settle">
+        <p>Step back to last month to see how it finished. A finished period is frozen, so a later correction cannot quietly change history.</p>
+      </li>
+    </ol>
+  </template>
+</body>
+</html>
